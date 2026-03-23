@@ -10,23 +10,12 @@ import org.passay.*; // import passay library for password validation
  */
 public class Login {
 
-    private String fullName, username, cellphoneNumber, password;
-    private User user = new User(fullName, username, cellphoneNumber, password);
+    private User user;
     public static Scanner sc = new Scanner(System.in);
 
     static final Pattern CELLPHONE_REGEX = Pattern.compile("^\\+27[0-9]{9}$"); //basic regex for an SA cellphone number.
     static final Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{5,20}$"); //pattern for alphanumeric 5-20 character string including an underscore.
     static final Pattern NAME_REGEX = Pattern.compile("^[\\p{L}_'\\- ]{2,50}$"); //basic regex to allow most names
-
-    static String usernameErrorMessage = "Incorrect username format.\nThe username must consist of 5-20 characters including an underscore";
-    static String cellphoneErrorMessage = "Error unrecognised cellphone number detected, please try again";
-    static String nameErrorMessage = "Ivalid entry detected, enter your proper name and surname";
-    static String passwordErrorMessage  = "";
-
-    static String namePrompt = "Please enter your full name and surname only.";
-    static String userNamePrompt = "Please enter your new username";
-    static String passwordPrompt = "Please enter your new password";
-    static String cellphonePrompt = "Please enter your cellphone number in the format +27XXXXXXXXX";
 
     private static final PasswordValidator VALIDATOR = new PasswordValidator(Arrays.asList( 
             new LengthRule(8,30), 
@@ -67,7 +56,7 @@ public class Login {
         }           
     }
 
-    public static boolean checkFirstName(String name) {
+    public static boolean checkFullName(String name) {
         return regexReader(NAME_REGEX, name.trim());        
     }  
     
@@ -79,12 +68,13 @@ public class Login {
         return regexReader(CELLPHONE_REGEX, cell.trim());
     }
 
-    public static String promptUntilValid(String prompt, Predicate <String> validator, String errorMessage) { //this is the validation input loop.
+    public static String promptUntilValid(String prompt, Predicate <String> validator, String errorMessage, String sucessMessage) { //this is the validation input loop.
         while (true) {
             System.out.println(prompt);
             String input = sc.nextLine();
 
             if (validator.test(input)) {
+                System.out.println(sucessMessage);
                 return input;
             } else {
                 System.err.println(errorMessage);
@@ -93,14 +83,14 @@ public class Login {
     }
 
     public String registerUser() { //returns messaging for false or true entries.
-        
-        fullName = promptUntilValid(namePrompt, Login::checkFirstName, nameErrorMessage);
-        username = promptUntilValid(userNamePrompt, Login::checkUsername, usernameErrorMessage);
-        cellphoneNumber = promptUntilValid(cellphonePrompt, Login::checkCellphoneNumber, cellphoneErrorMessage);
-        password = promptUntilValid(passwordPrompt, Login::checkPasswordComplexity, passwordErrorMessage);
+        String fullName, username, cellphoneNumber, password;
+        fullName = promptUntilValid(MessageLog.getNamePrompt(), Login::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
+        username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
+        cellphoneNumber = promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
+        password = promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
 
-        user = new User(fullName, username, cellphoneNumber, password); //assing varuables to user object
-        UserDatabase.addUser(user);
+        this.user = new User(fullName, username, cellphoneNumber, password); //assing varuables to user object
+        UserDatabase.addUser(this.user);
         returnLoginStatus(); //returns login status and has internal call to login.
         return "User registered successfully: " + user.getFullName();
     }
@@ -111,9 +101,7 @@ public class Login {
         System.out.println("Re-enter your password to login");
         String enteredPassword  = sc.nextLine();
 
-        return enterdUsername.equals(user.getUsername()) && enteredPassword.equals(user.getPassword());
-               
-        
+        return enterdUsername.equals(user.getUsername()) && enteredPassword.equals(user.getPassword());   //TODO: replace with with database search.
     }
 
     public String returnLoginStatus() {

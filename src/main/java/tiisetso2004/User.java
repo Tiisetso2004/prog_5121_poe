@@ -14,25 +14,25 @@ public class User {
 
     //use setters and utilities to update fields
     public boolean updateFullName(String name) {
-        name =  Login.promptUntilValid(Login.namePrompt,Login::checkFirstName, name);
+        name =  Login.promptUntilValid(MessageLog.getNamePrompt(), Login::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
         this.fullName = name;
         return true;
     }
 
     public boolean updateUsername(String usr) {
-        usr = Login.promptUntilValid(Login.userNamePrompt, Login::checkUsername, Login.usernameErrorMessage);
+        usr = Login.promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
         this.username = usr;
         return true;
     }
 
     public boolean updateCellphoneNumber(String cell) {
-        cell = Login.promptUntilValid(Login.cellphonePrompt, Login::checkCellphoneNumber, Login.cellphoneErrorMessage);
+        cell = Login.promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
         this.cellphoneNumber = cell;
         return true;
     }
 
     public boolean updatePassword(String pass) {
-        pass = Login.promptUntilValid(Login.passwordPrompt, Login::checkPasswordComplexity, Login.passwordErrorMessage);
+        pass = Login.promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
         this.password = pass;
         return true;
     }
