@@ -3,34 +3,38 @@ package tiisetso2004;
 public class User {
 
     private String fullName, username, cellphoneNumber, password;
-    Login user = new Login();
     
-    public User (String name, String user, String cell, String pass) {
-
+    //call to parameterized constructor to auto assign first-time users
+    public User (String name, String usr, String cell, String pass) { 
         this.fullName = name;
-        this.username = user;
+        this.username = usr;
         this.cellphoneNumber = cell;
         this.password = pass;
     }
 
-    public boolean setFullName(String fullName) {
-        this.fullName = fullName;
-        return user.checkFullName(fullName);
+    //use setters and utilities to update fields
+    public boolean updateFullName(String name) {
+        name =  Login.promptUntilValid(Login.namePrompt,Login::checkFirstName, name);
+        this.fullName = name;
+        return true;
     }
 
-    public boolean setUsername(String username) {
-        this.username = username;
-        return user.checkUsername(username);
+    public boolean updateUsername(String usr) {
+        usr = Login.promptUntilValid(Login.userNamePrompt, Login::checkUsername, Login.usernameErrorMessage);
+        this.username = usr;
+        return true;
     }
 
-    public boolean setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber;
-        return user.checkCellphoneNumber(cellphoneNumber);
+    public boolean updateCellphoneNumber(String cell) {
+        cell = Login.promptUntilValid(Login.cellphonePrompt, Login::checkCellphoneNumber, Login.cellphoneErrorMessage);
+        this.cellphoneNumber = cell;
+        return true;
     }
 
-    public boolean setPassword(String password) {
-        this.password = password;
-        return user.checkPasswordComplexity(password);
+    public boolean updatePassword(String pass) {
+        pass = Login.promptUntilValid(Login.passwordPrompt, Login::checkPasswordComplexity, Login.passwordErrorMessage);
+        this.password = pass;
+        return true;
     }
 
     public String getFullName() {
