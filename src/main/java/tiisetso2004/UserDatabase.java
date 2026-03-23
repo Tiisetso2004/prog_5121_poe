@@ -1,6 +1,29 @@
 package tiisetso2004;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class UserDatabase {
-    //TODO: implement simple array list data structure to store multiple 'User' objects.
+
+    private static List<User> userLib = new ArrayList<>(); //adding all users created during instance of program to one list.
+
+    public static boolean addUser(User user) {
+        if (user != null) {
+            userLib.add(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static int getUserCount() {
+        return userLib.size();
+    }
+
+    public static List<User> getUsers() {
+        
+        return Collections.unmodifiableList(userLib);
+    }
 
 }
