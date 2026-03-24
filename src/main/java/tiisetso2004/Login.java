@@ -14,7 +14,7 @@ public class Login {
     public static Scanner sc = new Scanner(System.in);
 
     static final Pattern CELLPHONE_REGEX = Pattern.compile("^\\+27[0-9]{9}$"); //basic regex for an SA cellphone number.
-    static final Pattern USERNAME_REGEX = Pattern.compile("^[a-zA-Z0-9_]{5,20}$"); //pattern for alphanumeric 5-20 character string including an underscore.
+    static final Pattern USERNAME_REGEX = Pattern.compile("^(?=.*_)[a-zA-Z0-9_]{5}$"); //pattern for alphanumeric 5 character string that includes underscore.
     static final Pattern NAME_REGEX = Pattern.compile("^[\\p{L}_'\\- ]{2,50}$"); //basic regex to allow most names
 
     private static final PasswordValidator VALIDATOR = new PasswordValidator(Arrays.asList( 
@@ -88,33 +88,36 @@ public class Login {
         username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
         cellphoneNumber = promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
         password = promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
-
+        
         this.user = new User(fullName, username, cellphoneNumber, password); //assing varuables to user object
         UserDatabase.addUser(this.user);
         returnLoginStatus(); //returns login status and has internal call to login.
         return "User registered successfully: " + user.getFullName();
     }
 
-    public boolean loginUser() { 
+    public boolean loginUser() {         
         System.out.println("Re-enter your username to login");
-        String enterdUsername = sc.nextLine();
+        String enteredUsername = sc.nextLine();
+        nullCheck(enteredUsername);
         System.out.println("Re-enter your password to login");
         String enteredPassword  = sc.nextLine();
-
-        return enterdUsername.equals(user.getUsername()) && enteredPassword.equals(user.getPassword());   //TODO: replace with with database search.
+        nullCheck(enteredPassword);
+        return enteredUsername.equals(user.getUsername()) && enteredPassword.equals(user.getPassword());
+        
     }
 
     public String returnLoginStatus() {
         String message;
-        boolean validLogin = loginUser();
+        boolean isLoggedIn = false;
+        while (!isLoggedIn) {
+            isLoggedIn = loginUser();
 
-        if (!validLogin) {
-            message = "Login Unsuccessful, please try again";
-            System.err.println(message);            
-        } else {
-            message = "Login Successful, Welcome back, It is great to see you again";
-            System.out.println(message);         
+            if (!isLoggedIn) {
+                System.out.println("Login Unsucessfull, your username or password do not match previous details");
+            }
         }
+        message = "Login successful, weclome back "+this.user.getFullName()+", it is great to see you again";
+        System.out.println(message);
         return message;   
     }
 }

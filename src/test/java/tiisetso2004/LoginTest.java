@@ -36,15 +36,28 @@ class LoginTest {
     @Test
     @DisplayName("checkUsername should accept valid username")
     void testCheckUsernameValid() {
-        assertTrue(Login.checkUsername("john_doe"));
-        assertTrue(Login.checkUsername("user123"));
+        assertTrue(Login.checkUsername("jo_hn"));
+        assertTrue(Login.checkUsername("ky_le"));
     }
 
     @Test
     @DisplayName("checkUsername should reject username with less than 5 characters")
     void testCheckUsernameTooShort() {
         assertFalse(Login.checkUsername("john"));
-        assertFalse(Login.checkUsername("ab_cd"));
+        assertFalse(Login.checkUsername("ab_d"));
+    }
+
+    @Test
+    @DisplayName("This is a list of possible edge cases ")
+    void testEdgeCases() {
+        //false edge cases
+        assertFalse(Login.checkUsername("José_")); //check for names with accents and special punctuations
+        assertFalse(Login.checkUsername("𝘢𝘣𝘤_1")); //italics
+        assertFalse(Login.checkUsername("Иван_")); // non-latin alpabetical input
+
+        //true edge cases
+        assertTrue(Login.checkUsername("10_01"));//edge case where there is no letter, will be accepted
+        assertTrue(Login.checkUsername("_____")); //consisting entirely of underscores
     }
 
     @Test
@@ -79,21 +92,21 @@ class LoginTest {
     @Test
     @DisplayName("checkFirstName should accept valid names")
     void testCheckFirstNameValid() {
-        assertTrue(Login.checkFirstName("John Doe"));
-        assertTrue(Login.checkFirstName("Mary-Jane"));
-        assertTrue(Login.checkFirstName("O'Brien"));
+        assertTrue(Login.checkFullName("John Doe"));
+        assertTrue(Login.checkFullName("Mary-Jane"));
+        assertTrue(Login.checkFullName("O'Brien"));
     }
 
     @Test
     @DisplayName("checkFirstName should reject single character")
     void testCheckFirstNameTooShort() {
-        assertFalse(Login.checkFirstName("A"));
+        assertFalse(Login.checkFullName("A"));
     }
 
     @Test
     @DisplayName("checkFirstName should reject names with numbers")
     void testCheckFirstNameWithNumbers() {
-        assertFalse(Login.checkFirstName("John123"));
+        assertFalse(Login.checkFullName("John123"));
     }
 
     // Tests for checkPasswordComplexity()
