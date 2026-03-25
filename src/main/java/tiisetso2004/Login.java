@@ -10,6 +10,10 @@ import org.passay.*; // import passay library for password validation
  */
 public class Login {
 
+    public Login() {
+        registerUser(); //operative method call in constructor
+    }
+
     private User user;
     public static Scanner sc = new Scanner(System.in);
 
@@ -82,7 +86,7 @@ public class Login {
         }
     }
 
-    public String registerUser() { //returns messaging for false or true entries.
+    private String registerUser() { //returns messaging for false or true entries.
         String fullName, username, cellphoneNumber, password;
         fullName = promptUntilValid(MessageLog.getNamePrompt(), Login::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
         username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
@@ -95,7 +99,7 @@ public class Login {
         return "User registered successfully: " + user.getFullName();
     }
 
-    public boolean loginUser() {         
+    private boolean loginUser() {         
         System.out.println("Re-enter your username to login");
         String enteredUsername = sc.nextLine();
         nullCheck(enteredUsername);
@@ -106,7 +110,7 @@ public class Login {
         
     }
 
-    public String returnLoginStatus() {
+    private String returnLoginStatus() {
         String message;
         boolean isLoggedIn = false;
         while (!isLoggedIn) {
