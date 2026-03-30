@@ -19,21 +19,25 @@ public class UserManager {
         System.out.println("--------------------");
         System.out.println("Choose your option:");
         System.out.println("1.Create new user\n2.QUIT");
-        int choice  = capture.nextInt();                           
-        //as program grows add new cases with function calls.
-        switch (choice) {
-            case 1: 
-                createUser();
-                break;
-            
-            case 2:
-                System.out.println("You chose quit\nExiting application......goodbye"); //simple exit logic.
-                System.exit(choice);
-                break;
-
-            default:
-                System.err.println("invalid input detected");
+        try {
+            int choice  = capture.nextInt();
+            //as program grows add new cases with function calls.
+            switch (choice) {
+                case 1:
+                    createUser();
+                    break;
+                case 2:
+                    System.out.println("You chose quit\nExiting application......goodbye"); //simple exit logic.
+                    System.exit(choice);
+                    break;
+                default:
+                    System.err.println("invalid input detected");
             }
+        } 
+        catch (java.util.InputMismatchException e) {
+            System.err.println("Invalid input. Please enter a number."); //catching non numeric input to prevent loop from crashing
+            capture.nextLine();
+        }
     }
     /*Create new login on every call*/
     private void createUser() {
