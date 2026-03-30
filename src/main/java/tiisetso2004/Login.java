@@ -3,23 +3,15 @@ package tiisetso2004;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.function.Predicate;
-import org.passay.*; // import passay library for password validation
+import org.passay.*; // import passay library for password validation.
 
-/*
- * The login class will primarily consist entirely of utility functions.
- */
 public class Login {
-
-    public Login() {
-        registerUser(); //operative method call in constructor
-    }
 
     private User user;
     public static Scanner sc = new Scanner(System.in);
-
     static final Pattern CELLPHONE_REGEX = Pattern.compile("^\\+27[0-9]{9}$"); //basic regex for an SA cellphone number.
     static final Pattern USERNAME_REGEX = Pattern.compile("^(?=.*_)[a-zA-Z0-9_]{5}$"); //pattern for alphanumeric 5 character string that includes underscore.
-    static final Pattern NAME_REGEX = Pattern.compile("^[\\p{L}_'\\- ]{2,50}$"); //basic regex to allow most names
+    static final Pattern NAME_REGEX = Pattern.compile("^[\\p{L}'\\- ]{2,50}$"); //basic regex to allow most names.
 
     private static final PasswordValidator VALIDATOR = new PasswordValidator(Arrays.asList( 
             new LengthRule(8,30), 
@@ -29,6 +21,9 @@ public class Login {
             new RepeatCharacterRegexRule(3), 
             new WhitespaceRule() 
     ));
+    /*No-args constructor, class takes in no input*/
+    public Login() {
+    }
 
     public static boolean nullCheck(String input) { //checks if any string input is null or blank.
         if (input == null || input.isBlank()) {  
@@ -38,7 +33,16 @@ public class Login {
         return true;
     }
 
-    public static boolean regexReader(Pattern regex, String input) { //helper function to compile regex patterns and return true or false
+    public static void Quit() {
+        System.out.println("Type 'QUIT' to quit");
+        String exit = sc.nextLine();
+        if(exit.toUpperCase().equals("QUIT")) {
+            System.out.println("Exiting application.....Goodbye");
+            System.exit(0);
+        }
+    }
+
+    public static boolean regexReader(Pattern regex, String input) { //helper function to compile regex patterns and return true or false.
         if (!nullCheck(input)) {
             return false;
         }
@@ -51,15 +55,14 @@ public class Login {
         }
         RuleResult result = VALIDATOR.validate(new PasswordData(password));
         if (result.isValid()) {
-            System.out.println("valid password");
-            return true; //returns true if the argument is valid
+            return true; //returns true if the argument is valid.
         } else {
             List<String> messages = VALIDATOR.getMessages(result);
-            messages.forEach(System.out::println); //gets messages for invalid inputs from passay library
-            return false; //returns false if the argument is invalid
+            messages.forEach(System.out::println); //gets messages for invalid inputs from passay library.
+            return false; //returns false if the argument is invalid.
         }           
     }
-
+    /*Implementation of the regexReader*/
     public static boolean checkFullName(String name) {
         return regexReader(NAME_REGEX, name.trim());        
     }  
@@ -71,11 +74,12 @@ public class Login {
     public static boolean checkCellphoneNumber(String cell) {
         return regexReader(CELLPHONE_REGEX, cell.trim());
     }
-
-    public static String promptUntilValid(String prompt, Predicate <String> validator, String errorMessage, String sucessMessage) { //this is the validation input loop.
+    /**Feedback loop**/
+    public static String promptUntilValid(String prompt, Predicate <String> validator,String errorMessage, String sucessMessage) {
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             String input = sc.nextLine();
+            System.out.println();//UX addition: terminal spacing.
 
             if (validator.test(input)) {
                 System.out.println(sucessMessage);
@@ -85,43 +89,77 @@ public class Login {
             }
         }
     }
-
-    private String registerUser() { //returns messaging for false or true entries.
-        String fullName, username, cellphoneNumber, password;
-        fullName = promptUntilValid(MessageLog.getNamePrompt(), Login::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
-        username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
-        cellphoneNumber = promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
-        password = promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
-        
-        this.user = new User(fullName, username, cellphoneNumber, password); //assing varuables to user object
-        UserDatabase.addUser(this.user);
-        returnLoginStatus(); //returns login status and has internal call to login.
-        return "User registered successfully: " + user.getFullName();
+    /*Helper methods to perform simple login, with specific users as parameters*/
+    private static boolean loginUsername(User user, String enteredUsername) {  
+        return enteredUsername.equals(user.getUsername());
     }
 
-    private boolean loginUser() {         
-        System.out.println("Re-enter your username to login");
-        String enteredUsername = sc.nextLine();
-        nullCheck(enteredUsername);
-        System.out.println("Re-enter your password to login");
-        String enteredPassword  = sc.nextLine();
-        nullCheck(enteredPassword);
-        return enteredUsername.equals(user.getUsername()) && enteredPassword.equals(user.getPassword());
-        
+    private static boolean loginPassword(User user, String enteredPassword) {
+        return enteredPassword.equals(user.getPassword());
     }
-
-    private String returnLoginStatus() {
-        String message;
-        boolean isLoggedIn = false;
-        while (!isLoggedIn) {
-            isLoggedIn = loginUser();
-
-            if (!isLoggedIn) {
-                System.out.println("Login Unsucessfull, your username or password do not match previous details");
+    /* Implementation of login helpers with internal loops */
+    public static boolean loginUsernameAuthenticator(User user) {
+        while (true) {
+            System.out.println(MessageLog.getUsernameLogin());
+            String enteredUsername = sc.nextLine();
+            boolean authenticate = loginUsername(user, enteredUsername);
+            if (authenticate) {
+                System.out.println(MessageLog.getAuthenticatedUsernameMessage());
+                return authenticate;
+            } else {
+                System.err.println(returnLoginStatus(authenticate, user));
+                // The loop continues, asking for the username again
             }
         }
-        message = "Login successful, weclome back "+this.user.getFullName()+", it is great to see you again";
-        System.out.println(message);
+    }
+
+    public static boolean loginPasswordAuthenticator(User user) { 
+        while(true) {
+            System.out.println(MessageLog.getPasswordLogin());
+            String enteredPassword = sc.nextLine();
+            boolean authenticate = loginPassword(user, enteredPassword);
+            if(authenticate) {
+                System.out.println(MessageLog.getAuthenticatedPasswordMessage());
+                return authenticate;
+            } else {
+                System.err.println(returnLoginStatus(authenticate, user));
+            }
+        }
+    }
+    /**
+     * Call to funtions to register new user.
+     * This is be the only non static funtion.
+     * Each instance of this method creates new unique users.
+     * User variables are authenticated and added to UserDatabase.
+     **/
+     public String registerUser() { 
+         String fullName, username, cellphoneNumber, password;
+         fullName = promptUntilValid(MessageLog.getNamePrompt(), Login::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
+         username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
+         cellphoneNumber = promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
+         password = promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
+         user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
+         UserDatabase.addUser(user); //add the user
+         loginUser(user);
+         return "User Sucessfully registered and added to local database";
+     }
+    /*Function to validate actual login*/
+    public static boolean loginUser(User user) {
+        if(loginUsernameAuthenticator(user) && loginPasswordAuthenticator(user)) {
+            System.out.println(returnLoginStatus(true, user)); //return messaging.
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /*Return login status messaging here, accepts boolean to invoke messaging*/
+    public static String returnLoginStatus(boolean isLoggedIn, User user) {
+        String message;
+        if (!isLoggedIn) {
+            message = MessageLog.getLoginError(); //set or retrive customized error messaging.
+        } else {
+            message = "Login successful, weclome back "+user.getFullName()+", it is great to see you again";
+        }
         return message;   
     }
 }
