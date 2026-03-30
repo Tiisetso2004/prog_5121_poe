@@ -6,10 +6,10 @@ import java.util.List;
 
 public class UserDatabase {
 
-    private static List<User> userLib = new ArrayList<>(); //adding all users created during instance of program to one list.
+    private static List<User> userLib = new ArrayList<>(); //adding all users created during instance of program to one static list.
 
     public static boolean addUser(User user) {
-        if (user != null) {
+        if (user != null) { //check if user objects are null
             userLib.add(user);
             return true;
         } else {
@@ -25,5 +25,4 @@ public class UserDatabase {
         
         return Collections.unmodifiableList(userLib);
     }
-
 }
