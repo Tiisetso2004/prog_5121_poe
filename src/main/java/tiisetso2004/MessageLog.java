@@ -1,21 +1,32 @@
 package tiisetso2004;
-
+/**
+ * @author tiisetso2004
+ * The Message Log class is a utility to return simple messages.
+ * It consists of getters to return String messages for specfic actions.
+ */
 public class MessageLog {
-
-    private static String usernameErrorMessage = "Username is not correctly formated; \nplease ensure that username contains an underscore \nand is no more than 5 characters in length.";
-    private static String cellphoneErrorMessage = "Cell phone number incorrectly formatted or does not contain international code";
-    private static String nameErrorMessage = "Invalid entry detected, enter your proper name and surname";
-    private static String passwordErrorMessage  = "";
-
-    private static String usernameMessage = "Username successfully captured";
-    private static String cellphoneMessage = "Cellphone number successfully captured";
-    private static String nameMessage =  "Name succesfully captured";
-    private static String passwordMessage = "Password sucessfully captured";
-
-    private static String namePrompt = "Please enter your full name and surname only.";
-    private static String userNamePrompt = "Please enter your new username";
-    private static String passwordPrompt = "Please enter your new password";
-    private static String cellphonePrompt = "Please enter your cellphone number in the format +27XXXXXXXXX";
+    /*Error Messaging*/
+    private final static String usernameErrorMessage = "Username is not correctly formated; \nplease ensure that username contains an underscore \nand is no more than 5 characters in length.";
+    private final static String cellphoneErrorMessage = "Cell phone number incorrectly formatted or does not contain international code";
+    private final static String nameErrorMessage = "Invalid entry detected, enter your proper name and surname";
+    private final static String passwordErrorMessage  = "Please try again and follow the above instructions for a valid password ^";
+    /*Sucess messaging*/
+    private final static String usernameMessage = "Username successfully captured";
+    private final static String cellphoneMessage = "Cellphone number successfully captured";
+    private final static String nameMessage =  "Identity confirmed";
+    private final static String passwordMessage = "Password sucessfully captured";
+    /*prompt messages*/
+    private final static String namePrompt = "\nPlease enter your full name and surname only: ";
+    private final static String userNamePrompt = "\nPlease enter your new username: ";
+    private final static String passwordPrompt = "\nPlease enter your new password: ";
+    private final static String cellphonePrompt = "\nPlease enter your cellphone number in the format +27XXXXXXXXX: ";
+    /*Login specific messaging*/
+    private final static String usernameLogin = "\nRe-enter your username to login: ";
+    private final static String passwordLogin = "\nRe-enter your password to login: ";
+    private final static String authenticatedUsernameMessage = "Username confirmed";
+    private final static String authenticatedPasswordMessage = "Password confirmed";
+    private final static String LoginError = "Login Failed: your username or password does not match the one you prevoiusly entered, please try again";
+ 
 
     public static String getUsernameErrorMessage() {
         return usernameErrorMessage;
@@ -65,4 +76,23 @@ public class MessageLog {
         return cellphonePrompt;
     }
 
+    public static String getUsernameLogin() {
+        return usernameLogin;
+    }
+
+    public static String getPasswordLogin() {
+        return passwordLogin;
+    }
+
+    public static String getAuthenticatedUsernameMessage() {
+        return authenticatedUsernameMessage;
+    }
+
+    public static String getAuthenticatedPasswordMessage() {
+        return authenticatedPasswordMessage;
+    }
+    
+    public static String getLoginError() {
+        return LoginError;
+    }
 }
