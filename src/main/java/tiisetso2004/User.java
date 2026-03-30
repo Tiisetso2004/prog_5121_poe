@@ -12,25 +12,21 @@ public class User {
         this.password = pass;
     }
 
-    //use setters and utilities to update fields
-    public boolean updateFullName(String name) {
+    //use setters to update fields
+    public void setFullName(String name) {
         this.fullName = name;
-        return true;
     }
 
-    public boolean updateUsername(String usr) {
+    public void setUsername(String usr) {
         this.username = usr;
-        return true;
     }
 
-    public boolean updateCellphoneNumber(String cell) {
+    public void setCellphoneNumber(String cell) {
         this.cellphoneNumber = cell;
-        return true;
     }
 
-    public boolean updatePassword(String pass) {
+    public void setPassword(String pass) {
         this.password = pass;
-        return true;
     }
 
     public String getFullName() {
