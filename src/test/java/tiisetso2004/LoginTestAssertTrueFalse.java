@@ -3,6 +3,8 @@ package tiisetso2004;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("POE Login Validation Test Data")
@@ -11,12 +13,12 @@ public class LoginTestAssertTrueFalse {
     //checkFullName tests
     @ParameterizedTest
     @ValueSource(strings = {
-        "J1son", 
-        " J@son", 
-        "Lar}ry", 
+        "J1son",
+        " J@son",
+        "Lar}ry",
         "____",
         "Kell_y",
-    })   
+    })
     @DisplayName("Check for invalid names")
     void invalidName(String names) {
         //rejects names with numbers special characters and underscores.
@@ -26,16 +28,16 @@ public class LoginTestAssertTrueFalse {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "Javone Matin-Roberts", 
-        "Thabang Monare", 
-        "Lee Ja-Hyaeoun", 
+        "Javone Matin-Roberts",
+        "Thabang Monare",
+        "Lee Ja-Hyaeoun",
         "Nico O'Reily",
         "José de la Cruz",
         "Chloë"
     })
     @DisplayName("Check for valid names")
     void validName(String names) {
-        //accepts names with hyphenated, accented and additional unicode characters. 
+        //accepts names with hyphenated, accented and additional unicode characters.
         assertTrue(Login.checkFullName(names));
 
     }
@@ -58,9 +60,9 @@ public class LoginTestAssertTrueFalse {
     @ValueSource(strings = {
         "kyl_1", //[POE test data]
         "JH_45",
-        "US_ER", 
+        "US_ER",
         "pP_as",
-        "f1_VE" 
+        "f1_VE"
     })
     @DisplayName("Check for correctly formatted usernames")
     void validUsername(String validUsernames) {
@@ -120,5 +122,36 @@ public class LoginTestAssertTrueFalse {
     })    @DisplayName("Check for valid password formats")
     void validPasswordFormat(String validPasswords) {
         assertTrue(Login.checkPasswordComplexity(validPasswords));
+    }
+    //tests for loginUser(), using test data
+    //TODO: refactor functions for easy testing or learn byte array input stream.
+    @Test
+    @DisplayName("Successful Login Test")
+    void trueLoginTests() {
+        String name = "Kyle Adams";
+        String username = "kyl_1";
+        String cell = "+27838968976";
+        String password = "Ch&&sec@ke99";
+        assertTrue(Login.checkFullName(name));
+        assertTrue(Login.checkUsername(username));
+        assertTrue(Login.checkCellphoneNumber(cell));
+        assertTrue(Login.checkPasswordComplexity(password));
+        User validUser = new User(name, username, cell, password);
+        assertTrue(Login.loginUser(validUser)); //for valid login this will
+    }
+    /*Login user will return false messaging for null user objects or mismatched variables*/
+    @Test
+    @DisplayName("Unsucessful Login Test")
+    void falseLoginTest() {
+        String name = "Kyle Adams";
+        String username = "kyl_1";
+        String cell = "27838968976";
+        String password = "Ch&&sec@ke99";
+        assertTrue(Login.checkFullName(name));
+        assertTrue(Login.checkUsername(username));
+        assertTrue(Login.checkCellphoneNumber(cell));
+        assertTrue(Login.checkPasswordComplexity(password));
+        User validUser = new User(name, username, cell, password);
+        assertFalse(Login.loginUser(validUser)); //for a valid Login this will always return false.
     }
 }
