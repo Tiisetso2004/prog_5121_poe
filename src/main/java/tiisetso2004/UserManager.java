@@ -13,22 +13,31 @@ public class UserManager {
     }
     /*Terminal UI to run program sessions*/
     public void startSession() {
+        boolean isRunning = true;
+        while(isRunning) { 
         System.out.println();
         System.out.println("--------------------");
         System.out.printf("%16s%n","Login Manager");
         System.out.println("--------------------");
         System.out.println("Choose your option:");
-        System.out.println("1.Create new user\n2.QUIT");
+        System.out.println("0.QUIT \n1.Create new user");
         try {
             int choice  = capture.nextInt();
             //as program grows add new cases with function calls.
             switch (choice) {
+                case 0:
+                    System.out.println("You chose QUIT, confirm y/n?");
+                    capture.nextLine(); //clearing of buffer from next int.
+                    String confirm = capture.nextLine();
+                    if(confirm.toLowerCase().equals("y")) {
+                        System.out.println("Quiting.....\nGoodbye");
+                        System.exit(0);
+                    } else if(confirm.toLowerCase().equals("n")) {
+                        System.out.println("You chose to continue");
+                    }
+                    break;
                 case 1:
                     createUser();
-                    break;
-                case 2:
-                    System.out.println("You chose quit\nExiting application......goodbye"); //simple exit logic.
-                    System.exit(choice);
                     break;
                 default:
                     System.err.println("invalid input detected");
@@ -39,6 +48,7 @@ public class UserManager {
             capture.nextLine();
         }
     }
+}
     /*Create new login on every call*/
     private void createUser() {
         Login login = new Login();
