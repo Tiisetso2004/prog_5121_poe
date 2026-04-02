@@ -14,7 +14,7 @@ public class MessageLog {
     private final static String usernameMessage = "Username successfully captured";
     private final static String cellphoneMessage = "Cellphone number successfully captured";
     private final static String nameMessage =  "Identity confirmed";
-    private final static String passwordMessage = "Password sucessfully captured";
+    private final static String passwordMessage = "Password successfully captured";
     /*prompt messages*/
     private final static String namePrompt = "\nPlease enter your full name and surname only: ";
     private final static String userNamePrompt = "\nPlease enter your new username: ";
@@ -26,6 +26,8 @@ public class MessageLog {
     private final static String authenticatedUsernameMessage = "Username confirmed";
     private final static String authenticatedPasswordMessage = "Password confirmed";
     private final static String LoginError = "Login Failed: your username or password does not match the one you prevoiusly entered, please try again";
+    private final static String nullUserError = "Error: User object does not exist";
+    private final static String captureSucessEntry = "Database Entry Confirmation: User was created and stored in local database";
  
 
     public static String getUsernameErrorMessage() {
@@ -94,5 +96,17 @@ public class MessageLog {
     
     public static String getLoginError() {
         return LoginError;
+    }
+
+    public static String getLoginSucessMessage(User user) {
+        return "\nLogin successful, welcome back " + user.getFullName() + ", it is great to see you again";
+    }
+    
+    public static String getNullUserError() {
+        return nullUserError;
+    }
+
+    public static String getCaptureSucessEntry() {
+        return captureSucessEntry;
     }
 }
