@@ -7,7 +7,6 @@ import org.passay.*; // import passay library for password validation.
 
 public class Login {
 
-    private User user;
     public static Scanner sc = new Scanner(System.in);
     static final Pattern CELLPHONE_REGEX = Pattern.compile("^\\+27[0-9]{9}$"); //basic regex for an SA cellphone number.
     static final Pattern USERNAME_REGEX = Pattern.compile("^(?=.*_)[a-zA-Z0-9_]{5}$"); //pattern for alphanumeric 5 character string that includes underscore.
@@ -138,10 +137,10 @@ public class Login {
          username = promptUntilValid(MessageLog.getUserNamePrompt(), Login::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
          cellphoneNumber = promptUntilValid(MessageLog.getCellphonePrompt(), Login::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
          password = promptUntilValid(MessageLog.getPasswordPrompt(), Login::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
-         user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
-         UserDatabase.addUser(user); //add the user
+         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
+         UserDatabase.addUser(user); //add the user to database
          loginUser(user);
-         return "User Sucessfully registered and added to local database";
+         return returnLoginStatus(user);
      }
     /*Function to validate actual login*/
     public static boolean loginUser(User user) {
@@ -152,14 +151,28 @@ public class Login {
             return false;
         }
     }
-    /*Return login status messaging here, accepts boolean to invoke messaging*/
+
+    /*Overloaded returnLoginStatus(), accepts boolean to invoke messaging alogside 'User' objects*/
     public static String returnLoginStatus(boolean isLoggedIn, User user) {
         String message;
         if (!isLoggedIn) {
             message = MessageLog.getLoginError(); //set or retrive customized error messaging.
-        } else {
-            message = "Login successful, weclome back "+user.getFullName()+", it is great to see you again";
+        } else {//successful login 
+            message = MessageLog.getLoginSucessMessage(user);
         }
         return message;   
+    }
+    /*returnLoginStatus specific to registerUser()*/
+    public static String returnLoginStatus(User user) {
+        String message;
+        if (user !=null) {
+            message = MessageLog.getCaptureSucessEntry();
+            System.out.println(message);
+            return message;
+        } else {
+            message = MessageLog.getNullUserError(); //set or retrieve customized error messaging.
+            System.out.println(message);
+            return message;
+        }   
     }
 }
