@@ -32,15 +32,6 @@ public class Login {
         return true;
     }
 
-    public static void Quit() {
-        System.out.println("Type 'QUIT' to quit");
-        String exit = sc.nextLine();
-        if(exit.toUpperCase().equals("QUIT")) {
-            System.out.println("Exiting application.....Goodbye");
-            System.exit(0);
-        }
-    }
-
     public static boolean regexReader(Pattern regex, String input) { //helper function to compile regex patterns and return true or false.
         if (!nullCheck(input)) {
             return false;
