@@ -3,13 +3,15 @@ package tiisetso2004;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.util.Scanner;
+
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("POE Login Validation Test Data")
 public class LoginTestAssertTrueFalse {
+    Scanner testScanner = new Scanner(System.in);
 
     //checkFullName tests
     @ParameterizedTest
@@ -125,36 +127,36 @@ public class LoginTestAssertTrueFalse {
         assertTrue(Login.checkPasswordComplexity(validPasswords));
     }
 
-    public void readScannerInput(String username, String password, boolean condition, User user) {
-        InputStream originalInput = System.in;
-        try {
-            String simulatedInput = username + "\n" + password + "\n";
-            ByteArrayInputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
-            System.setIn(in);
-            if (!condition) {
-                assertFalse(Login.loginUsernameAuthenticator(user));
-                assertFalse(Login.loginPasswordAuthenticator(user)); 
-            } else {
-                assertTrue(Login.loginUsernameAuthenticator(user));
-                assertTrue(Login.loginPasswordAuthenticator(user));
-            }
-        } finally {
-            System.setIn(originalInput);
-        }
-    }
     //tests for loginUser() using POE test data
     //TODO: Refactor functions for easy testing or learn ByteArrayInputStream.
     @Test
     @DisplayName("Successful Login Test")
     void trueLoginTests() {
-        User validTestUser =  new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
-        readScannerInput("kyl_1", "Ch&&sec@ke99", true, validTestUser);
+        User testUser = new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
+        // Simulate the user typing the correct username then the correct password
+
+        String simulatedInput = "kyl_1\nCh&&sec@ke99\n";
+        Scanner mockScanner = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        // Inject the fake scanner into the static method
+        boolean result = Login.loginUser(testUser, mockScanner);
+
+        assert result == true; // The test passes automatically!
     }
+
     /*Login user will return false messaging for null user objects or mismatched variables*/
     @Test
     @DisplayName("Unsucessful Login Test")
     void falseLoginTest() {
-        User invalidTestUser =  new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
-        readScannerInput("US_ER", "P@ssword!2", false, invalidTestUser);//java util scanner not found error here, if persists use dependency injection
+        User testUser = new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
+        // Simulate the user typing the incorrect username, password or both
+
+        String simulatedInput = "J_hn\nWrong_p@ssword\n";
+        Scanner mockScanner = new Scanner(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
+
+        // Inject the fake scanner into the static method
+        boolean result = Login.loginUser(testUser, mockScanner);
+
+        assert result == false; // The test fails because of the incorrect credentials    
     }
 }
