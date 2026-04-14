@@ -20,7 +20,7 @@ public class LoginTestAssertEquals {
     @DisplayName("Check for invalid names")
     void invalidName(String names) {
         //rejects names with numbers special characters and underscores.
-        assertFalse(Login.checkFullName(names));
+        assertEquals(false, Login.checkFullName(names));
 
     }
 
@@ -36,7 +36,7 @@ public class LoginTestAssertEquals {
     @DisplayName("Check for valid names")
     void validName(String names) {
         //accepts names with hyphenated, accented and additional unicode characters. 
-        assertTrue(Login.checkFullName(names));
+        assertEquals(true, Login.checkFullName(names));
 
     }
 
@@ -51,7 +51,7 @@ public class LoginTestAssertEquals {
     })
     @DisplayName("Check for incorrectly formatted usernames")
     void invalidUsername(String invalidUsernames) {
-        assertFalse(Login.checkUsername(invalidUsernames));
+        assertEquals(false, Login.checkUsername(invalidUsernames));
     }
 
     @ParameterizedTest
@@ -64,7 +64,7 @@ public class LoginTestAssertEquals {
     })
     @DisplayName("Check for correctly formatted usernames")
     void validUsername(String validUsernames) {
-        assertTrue(Login.checkUsername(validUsernames));
+        assertEquals(true, Login.checkUsername(validUsernames));
 
     }
 
@@ -80,7 +80,7 @@ public class LoginTestAssertEquals {
     })
     @DisplayName("Check for incorrectly formatted cellphone numbers")
     void invalidCellphoneNumber(String invalidCellNumbers) {
-        assertFalse(Login.checkCellphoneNumber(invalidCellNumbers));
+        assertEquals(false, Login.checkCellphoneNumber(invalidCellNumbers));
     }
 
     @ParameterizedTest
@@ -92,7 +92,7 @@ public class LoginTestAssertEquals {
         "+27258147369"
     })    @DisplayName("Check for correctly formatted cellphone numbers")
     void validCellphoneNumber(String validCellNumbers) {
-        assertTrue(Login.checkCellphoneNumber(validCellNumbers));
+        assertEquals(true, Login.checkCellphoneNumber(validCellNumbers));
     }
 
     //checkPasswordComplexity test
@@ -107,7 +107,7 @@ public class LoginTestAssertEquals {
 
     })    @DisplayName("Check for invalid password formats")
     void invalidPasswordFormat(String invalidPasswords) {
-        assertFalse(Login.checkPasswordComplexity(invalidPasswords));
+        assertEquals(false, Login.checkPasswordComplexity(invalidPasswords));
     }
 
     @ParameterizedTest
@@ -119,6 +119,6 @@ public class LoginTestAssertEquals {
         "Ch&&sec@ke99" //[POE test data]
     })    @DisplayName("Check for valid password formats")
     void validPasswordFormat(String validPasswords) {
-        assertTrue(Login.checkPasswordComplexity(validPasswords));
+        assertEquals(true, Login.checkPasswordComplexity(validPasswords));
     }
 }

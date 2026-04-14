@@ -14,7 +14,7 @@ public class Login {
 
     private static final PasswordValidator VALIDATOR = new PasswordValidator(Arrays.asList( 
             new LengthRule(8,30), 
-            new CharacterRule(EnglishCharacterData.UpperCase,1), 
+            new CharacterRule(EnglishCharacterData.UpperCase,1),//at least one uppercase char 
             new CharacterRule(EnglishCharacterData.Special,1), 
             new CharacterRule(EnglishCharacterData.Digit,1), 
             new RepeatCharacterRegexRule(3), 
