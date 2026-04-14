@@ -11,14 +11,14 @@ public class UserManager {
     /*Default no-args constructor*/
     public UserManager() {
     }
-    /*Terminal UI to run program sessions*/
+    /*Terminal UI to run program as sessions*/
     public void startSession() {
         boolean isRunning = true;
         while(isRunning) { 
         System.out.println();
-        System.out.println("--------------------");
-        System.out.printf("%16s%n","Login Manager");
-        System.out.println("--------------------");
+        System.out.println("-----------------------------------------");
+        System.out.println("Login Manager V1.0");
+        System.out.println("-----------------------------------------");
         System.out.println("Choose your option:");
         System.out.println("0.QUIT \n1.Create new user");
         try {
@@ -32,7 +32,7 @@ public class UserManager {
                     if(confirm.toLowerCase().equals("y")) {
                         System.out.println("Quiting.....\nGoodbye");
                         System.exit(0);
-                    } else if(confirm.toLowerCase().equals("n")) {
+                    } else if (confirm.toLowerCase().equals("n")) {
                         System.out.println("You chose to continue");
                     }
                     break;
@@ -53,5 +53,13 @@ public class UserManager {
     private void createUser() {
         Login login = new Login();
         login.registerUser();
+    }
+    /*Create internal menu system*/
+    public void updateUserDetails() {
+
+    }
+    /*Call function from user database*/
+    public void deleteUser() {
+
     }
 }

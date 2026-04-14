@@ -164,6 +164,6 @@ public class Login {
             message = MessageLog.getNullUserError(); //set or retrieve customized error messaging.
             System.out.println(message);
             return message;
-        }   
+        }
     }
 }

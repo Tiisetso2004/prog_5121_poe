@@ -1,10 +1,11 @@
 package tiisetso2004;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.api.Test;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("POE Login Validation Test Data")
@@ -123,35 +124,37 @@ public class LoginTestAssertTrueFalse {
     void validPasswordFormat(String validPasswords) {
         assertTrue(Login.checkPasswordComplexity(validPasswords));
     }
-    //tests for loginUser(), using test data
-    //TODO: refactor functions for easy testing or learn byte array input stream.
+
+    public void readScannerInput(String username, String password, boolean condition, User user) {
+        InputStream originalInput = System.in;
+        try {
+            String simulatedInput = username + "\n" + password + "\n";
+            ByteArrayInputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
+            System.setIn(in);
+            if (!condition) {
+                assertFalse(Login.loginUsernameAuthenticator(user));
+                assertFalse(Login.loginPasswordAuthenticator(user)); 
+            } else {
+                assertTrue(Login.loginUsernameAuthenticator(user));
+                assertTrue(Login.loginPasswordAuthenticator(user));
+            }
+        } finally {
+            System.setIn(originalInput);
+        }
+    }
+    //tests for loginUser() using POE test data
+    //TODO: Refactor functions for easy testing or learn ByteArrayInputStream.
     @Test
     @DisplayName("Successful Login Test")
     void trueLoginTests() {
-        String name = "Kyle Adams";
-        String username = "kyl_1";
-        String cell = "+27838968976";
-        String password = "Ch&&sec@ke99";
-        assertTrue(Login.checkFullName(name));
-        assertTrue(Login.checkUsername(username));
-        assertTrue(Login.checkCellphoneNumber(cell));
-        assertTrue(Login.checkPasswordComplexity(password));
-        User validUser = new User(name, username, cell, password);
-        assertTrue(Login.loginUser(validUser)); //for valid login this will
+        User validTestUser =  new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
+        readScannerInput("kyl_1", "Ch&&sec@ke99", true, validTestUser);
     }
     /*Login user will return false messaging for null user objects or mismatched variables*/
     @Test
     @DisplayName("Unsucessful Login Test")
     void falseLoginTest() {
-        String name = "Kyle Adams";
-        String username = "kyl_1";
-        String cell = "27838968976";
-        String password = "Ch&&sec@ke99";
-        assertTrue(Login.checkFullName(name));
-        assertTrue(Login.checkUsername(username));
-        assertTrue(Login.checkCellphoneNumber(cell));
-        assertTrue(Login.checkPasswordComplexity(password));
-        User validUser = new User(name, username, cell, password);
-        assertFalse(Login.loginUser(validUser)); //for a valid Login this will always return false.
+        User invalidTestUser =  new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
+        readScannerInput("US_ER", "P@ssword!2", false, invalidTestUser);//java util scanner not found error here, if persists use dependency injection
     }
 }
