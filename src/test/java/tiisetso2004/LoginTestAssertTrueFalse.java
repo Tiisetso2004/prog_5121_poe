@@ -133,14 +133,11 @@ public class LoginTestAssertTrueFalse {
     void trueLoginTests() {
         User testUser = new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
         // Simulate the user typing the correct username then the correct password
-
         String simulatedInput = "kyl_1\nCh&&sec@ke99\n";
+        //inject the simulated input into the scanner
         Scanner mockScanner = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        // Inject the fake scanner into the static method
-        boolean result = Login.loginUser(testUser, mockScanner);
-
-        assert result == true; // The test passes automatically!
+        //the test passes with the correct variables
+        assertTrue( Login.loginUser(testUser, mockScanner));
     }
 
     /*Login user will return false messaging for null user objects or mismatched variables*/
@@ -152,10 +149,8 @@ public class LoginTestAssertTrueFalse {
 
         String simulatedInput = "J_hn\nWrong_p@ssword\n";
         Scanner mockScanner = new Scanner(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
+        //the test will fail due to incorrect variables.
+        assertFalse(Login.loginUser(testUser, mockScanner));
 
-        // Inject the fake scanner into the static method
-        boolean result = Login.loginUser(testUser, mockScanner);
-
-        assert result == false; // The test fails because of the incorrect credentials    
     }
 }
