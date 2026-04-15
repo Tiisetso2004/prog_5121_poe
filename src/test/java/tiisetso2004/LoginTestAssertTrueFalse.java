@@ -128,7 +128,6 @@ public class LoginTestAssertTrueFalse {
     }
 
     //tests for loginUser() using POE test data
-    //TODO: Refactor functions for easy testing or learn ByteArrayInputStream.
     @Test
     @DisplayName("Successful Login Test")
     void trueLoginTests() {
