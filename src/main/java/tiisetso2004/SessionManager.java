@@ -2,14 +2,14 @@ package tiisetso2004;
 
 import java.util.Scanner;
  /**
- * UserManager is the UI manager for the application.
+ * SessionManager is the UI manager for the application.
  * All designs for the user interface of the program will are made here. 
  **/
-public class UserManager {
+public class SessionManager {
 
     Scanner capture  = new Scanner(System.in);
     /*Default no-args constructor*/
-    public UserManager() {
+    public SessionManager() {
     }
     /*Terminal UI to run program as sessions*/
     public void startSession() {
