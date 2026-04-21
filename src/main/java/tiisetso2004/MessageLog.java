@@ -28,8 +28,8 @@ public class MessageLog {
     private final static String LoginError = "Login Failed: your username or password does not match the one you prevoiusly entered, please try again";
     private final static String nullUserError = "Error: User object does not exist";
     private final static String captureSucessEntry = "Database Entry Confirmation: User was created and stored in local database";
- 
 
+    /*Getters to retrieve messages*/
     public static String getUsernameErrorMessage() {
         return usernameErrorMessage;
     }

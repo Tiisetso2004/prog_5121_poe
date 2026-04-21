@@ -3,20 +3,35 @@ package tiisetso2004;
 public class Message {
 
     public Message() {
-
     }
 
-    public boolean checkMessageID() {}
+    public boolean checkMessageID() {
+        return true;
+    }
 
-    public String checkRecepientCell() {}
+    public String checkRecepientCell() {
+        return "";
+    }
 
-    public boolean createMessageHash() {}
+    public boolean createMessageHash() {
+        return true;
+    }
 
-    public SentMessage() {} 
+    //----------UI----------//
 
-    public printMessages() {}
+    public int SentMessage() {
+        return 0;
+    } 
 
-    public returnTotalMessages() {}
+    public String printMessages() {
+        return "";
+    }
 
-    public void StoreMessage() {}
+    public String returnTotalMessages() {
+        return "";
+    }
+
+    public void StoreMessage() {
+        
+    }
 }

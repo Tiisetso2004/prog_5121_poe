@@ -12,7 +12,7 @@ public class MessageData {
         this.sender = sender;
         this.recepient = recipient;
     }
-    //getters only to retrieve values for metadata
+    //getters only to retrieve values for message metadata
 
     public String getMessage() {
         return message;
