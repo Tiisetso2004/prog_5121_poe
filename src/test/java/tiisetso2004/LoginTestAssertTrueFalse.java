@@ -25,7 +25,7 @@ public class LoginTestAssertTrueFalse {
     @DisplayName("Check for invalid names")
     void invalidName(String names) {
         //rejects names with numbers special characters and underscores.
-        assertFalse(Login.checkFullName(names));
+        assertFalse(Validator.checkFullName(names));
 
     }
 
@@ -41,7 +41,7 @@ public class LoginTestAssertTrueFalse {
     @DisplayName("Check for valid names")
     void validName(String names) {
         //accepts names with hyphenated, accented and additional unicode characters.
-        assertTrue(Login.checkFullName(names));
+        assertTrue(Validator.checkFullName(names));
 
     }
 
@@ -56,7 +56,7 @@ public class LoginTestAssertTrueFalse {
     })
     @DisplayName("Check for incorrectly formatted usernames")
     void invalidUsername(String invalidUsernames) {
-        assertFalse(Login.checkUsername(invalidUsernames));
+        assertFalse(Validator.checkUsername(invalidUsernames));
     }
 
     @ParameterizedTest
@@ -69,7 +69,7 @@ public class LoginTestAssertTrueFalse {
     })
     @DisplayName("Check for correctly formatted usernames")
     void validUsername(String validUsernames) {
-        assertTrue(Login.checkUsername(validUsernames));
+        assertTrue(Validator.checkUsername(validUsernames));
 
     }
 
@@ -85,7 +85,7 @@ public class LoginTestAssertTrueFalse {
     })
     @DisplayName("Check for incorrectly formatted cellphone numbers")
     void invalidCellphoneNumber(String invalidCellNumbers) {
-        assertFalse(Login.checkCellphoneNumber(invalidCellNumbers));
+        assertFalse(Validator.checkCellphoneNumber(invalidCellNumbers));
     }
 
     @ParameterizedTest
@@ -97,7 +97,7 @@ public class LoginTestAssertTrueFalse {
         "+27258147369"
     })    @DisplayName("Check for correctly formatted cellphone numbers")
     void validCellphoneNumber(String validCellNumbers) {
-        assertTrue(Login.checkCellphoneNumber(validCellNumbers));
+        assertTrue(Validator.checkCellphoneNumber(validCellNumbers));
     }
 
     //checkPasswordComplexity test
@@ -112,7 +112,7 @@ public class LoginTestAssertTrueFalse {
 
     })    @DisplayName("Check for invalid password formats")
     void invalidPasswordFormat(String invalidPasswords) {
-        assertFalse(Login.checkPasswordComplexity(invalidPasswords));
+        assertFalse(Validator.checkPasswordComplexity(invalidPasswords));
     }
 
     @ParameterizedTest
@@ -124,7 +124,7 @@ public class LoginTestAssertTrueFalse {
         "Ch&&sec@ke99" //[POE test data]
     })    @DisplayName("Check for valid password formats")
     void validPasswordFormat(String validPasswords) {
-        assertTrue(Login.checkPasswordComplexity(validPasswords));
+        assertTrue(Validator.checkPasswordComplexity(validPasswords));
     }
 
     //tests for loginUser() using POE test data
@@ -137,7 +137,7 @@ public class LoginTestAssertTrueFalse {
         //inject the simulated input into the scanner
         Scanner mockScanner = new Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
         //the test passes with the correct variables
-        assertTrue( Login.loginUser(testUser, mockScanner));
+        assertTrue( LoginManager.loginUser(testUser, mockScanner));
     }
 
     /*Login user will return false messaging for null user objects or mismatched variables*/
@@ -150,7 +150,7 @@ public class LoginTestAssertTrueFalse {
         String simulatedInput = "J_hn\nWrong_p@ssword\n";
         Scanner mockScanner = new Scanner(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
         //the test will fail due to incorrect variables.
-        assertFalse(Login.loginUser(testUser, mockScanner));
+        assertFalse(LoginManager.loginUser(testUser, mockScanner));
 
     }
 }

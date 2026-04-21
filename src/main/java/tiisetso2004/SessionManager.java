@@ -51,7 +51,7 @@ public class SessionManager {
 }
     /*Create new login on every call*/
     private void createUser() {
-        Login login = new Login();
+        LoginManager login = new LoginManager();
         login.registerUser();
     }
     /*Create internal menu system*/
