@@ -31,6 +31,7 @@ public class LoginManager {
     private static boolean loginPassword(User user, String enteredPassword) {
         return enteredPassword.equals(user.getPassword());
     }
+    
     /* Implementation of login helpers with internal loops */
     public static boolean loginUsernameAuthenticator(User user, Scanner sc) {
         System.out.println(MessageLog.getUsernameLogin());
@@ -56,6 +57,7 @@ public class LoginManager {
             }
         return authenticate;
     }
+
     /**
      * Call to funtions to register new user.
      * This is be the only non static funtion.
@@ -63,16 +65,17 @@ public class LoginManager {
      * User variables are authenticated and added to UserDatabase.
      **/
      public String registerUser() { 
-         String fullName, username, cellphoneNumber, password;
-         fullName = promptUntilValid(sc, MessageLog.getNamePrompt(), Validator::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
-         username = promptUntilValid(sc, MessageLog.getUserNamePrompt(), Validator::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
-         cellphoneNumber = promptUntilValid(sc, MessageLog.getCellphonePrompt(), Validator::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
-         password = promptUntilValid(sc, MessageLog.getPasswordPrompt(), Validator::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
-         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
-         UserDatabase.addUser(user); //add the user to database
-         loginUser(user,sc);
-         return returnLoginStatus(user);
-     }
+        String fullName, username, cellphoneNumber, password;
+        fullName = promptUntilValid(sc, MessageLog.getNamePrompt(), Validator::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
+        username = promptUntilValid(sc, MessageLog.getUserNamePrompt(), Validator::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
+        cellphoneNumber = promptUntilValid(sc, MessageLog.getCellphonePrompt(), Validator::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
+        password = promptUntilValid(sc, MessageLog.getPasswordPrompt(), Validator::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
+        User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
+        UserDatabase.addUser(user); //add the user to database
+        loginUser(user,sc);
+        return returnLoginStatus(user);
+    }
+
     /*Function to validate actual login*/
     public static boolean loginUser(User user,Scanner sc) {
         if(loginUsernameAuthenticator(user, sc) && loginPasswordAuthenticator(user, sc)) {
@@ -93,6 +96,7 @@ public class LoginManager {
         }
         return message;   
     }
+
     /*returnLoginStatus specific to registerUser()*/
     public static String returnLoginStatus(User user) {
         String message;
@@ -106,5 +110,4 @@ public class LoginManager {
             return message;
         }
     }
-
 }

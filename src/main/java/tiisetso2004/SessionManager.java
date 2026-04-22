@@ -1,18 +1,22 @@
 package tiisetso2004;
 
-import java.util.Scanner;
  /**
  * SessionManager is the UI manager for the application.
  * All designs for the user interface of the program will are made here. 
  **/
+
+import java.util.*;
+
 public class SessionManager {
 
     Scanner capture  = new Scanner(System.in);
+
     /*Default no-args constructor*/
     public SessionManager() {
     }
+    
     /*Terminal UI to run program as sessions*/
-    public void startSession() {
+    public void LoginSession() {
         boolean isRunning = true;
         while(isRunning) { 
         System.out.println();
@@ -23,6 +27,7 @@ public class SessionManager {
         System.out.println("0.QUIT \n1.Create new user");
         try {
             int choice  = capture.nextInt();
+
             //as program grows add new cases with function calls.
             switch (choice) {
                 case 0:

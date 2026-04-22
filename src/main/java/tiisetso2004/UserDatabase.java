@@ -1,15 +1,15 @@
 package tiisetso2004;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class UserDatabase {
 
-    private static List<User> userLib = new ArrayList<>(); //adding all users created during instance of program to one static list.
+    //adding all users created during instance of program to one static list.
+    private static List<User> userLib = new ArrayList<>();
 
+    //check if user objects are null
     public static boolean addUser(User user) {
-        if (user != null) { //check if user objects are null
+        if (user != null) {
             userLib.add(user);
             return true;
         } else {
