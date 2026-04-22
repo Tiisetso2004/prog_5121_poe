@@ -71,6 +71,15 @@ public class Validator {
             List<String> messages = VALIDATOR.getMessages(result);
             messages.forEach(System.out::println); //gets messages for invalid inputs from passay library.
             return false; //returns false if the argument is invalid.
-        }           
+        } 
+    }
+
+    public static String messageValidator(String m) {
+        String message = m.trim();
+        if(!Validator.nullCheck(message) || message.length() > 250) {
+            return "Message is invalid:\nit exceeds 250 characters or is blank";
+        } else {
+            return message;
+        }
     }
 }

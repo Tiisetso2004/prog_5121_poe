@@ -2,14 +2,14 @@ package tiisetso2004;
 
 public class MessageData {
 
-    private final String message, messageHash, sender, recepient; //ensure message contents or metadata cannot be changed
-    private final int messageID;
+    //ensure message contents or metadata cannot be changed by declaring fields as final.
+    private final String message, messageHash, recepient;
+    private final String messageID;
 
-    public MessageData(String message, String messageHash, String sender, String recipient, int messageID) {
+    public MessageData(String message, String messageHash, String recipient, String messageID) {
         this.message = message;
-        this.messageHash = messageHash;
-        this.messageID = messageID;
-        this.sender = sender;
+        this.messageHash = messageHash; //auto generated
+        this.messageID = messageID; //auto generated
         this.recepient = recipient;
     }
     
@@ -23,12 +23,8 @@ public class MessageData {
         return messageHash;
     }
 
-    public int getMessageID() {
+    public String getMessageID() {
         return messageID;
-    }
-
-    public String getSender() {
-        return sender;
     }
 
     public String getRecepient() {
@@ -37,8 +33,5 @@ public class MessageData {
 
     public void WriteMessage() {
 
-    }
-
-    
-    
+    }   
 }
