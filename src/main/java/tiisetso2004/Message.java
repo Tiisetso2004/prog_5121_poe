@@ -2,6 +2,8 @@ package tiisetso2004;
 
 public class Message {
 
+    int messsagesSent;
+
     public Message() {
     }
 
@@ -38,13 +40,25 @@ public class Message {
             return cellphoneNumber;
         }
     }
+
     //TODO: use substrings and string builder to append message hash
-    public boolean createMessageHash() {
-        return true;
+    //first two num of mID (:) and message num (:) first and last words of the message.
+    //colons are delimiters.
+    public static String createMessageHash(String messageID, int messageNum, String message) {
+        String[] textArray = message.trim().split("\\s+"); //turn message into array
+
+        StringBuilder mHash = new StringBuilder();
+        mHash.append(messageID,0,2 ).append(":") //first two numbers
+             .append(messageNum).append(":") //append the entire string
+             .append(textArray[0])
+             .append(textArray[textArray.length-1]); //first and last word of message appended together
+        String messageHash = mHash.toString();
+
+        return messageHash;
     }
 
     //----------UI----------//
-    //send, disregard or store message
+    //send, discard or store message options
     public void SendMessage() {
     } 
 
@@ -53,10 +67,12 @@ public class Message {
         return "";
     }
 
-    public String returnTotalMessages() {
-        return "";
+    //Returns no of total messages sent
+    public int returnTotalMessages() {
+        return 0;
     }
 
+    //store messages objects in JSON
     public void StoreMessage() {
         
     }
