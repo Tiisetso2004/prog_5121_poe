@@ -10,30 +10,32 @@ public class QuickChat {
     }
 
     public void writeMessage(String message) {
-       System.out.print("How many messages would you like to create?");
-       int counter = qcScan.nextInt();
-       System.out.println();
+        System.out.print("How many messages would you like to create?");
+        int counter = qcScan.nextInt();
+        System.out.println();
 
-       for(int i = 0; i > counter; i++) {
-        int messageNum = counter;
+        for(int i = 0; i > counter; i++) {
+            int messageNum = counter;
 
-        String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber", Validator::checkCellphoneNumber, MessageLog.getCellphoneMessage(), MessageLog.getCellphoneErrorMessage());
+            String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber", Validator::checkCellphoneNumber, MessageLog.getCellphoneMessage(), MessageLog.getCellphoneErrorMessage());
 
-        System.out.println("======Message:"+counter+"======");
-        System.out.println("Enter the message:");
-        String text = qcScan.nextLine();
+            System.out.println("======Message:"+counter+"======");
+            System.out.println("Enter the message:");
+            String text = qcScan.nextLine();
         
-        message = text.trim();
-        String ID = Message.GenerateMessageID(10);
-        String messageHash = Message.createMessageHash(ID, messageNum, message);
-        MessageData messObj = new MessageData(message, messageHash, contact, ID);
-       }
+            message = text.trim();
+            String ID = Message.GenerateMessageID(10);
+            String messageHash = Message.createMessageHash(ID, messageNum, message);
+            MessageData messObj = new MessageData(message, messageHash, contact, ID);
+            UserDatabase.captureMessageDraft(messObj);
+        }           
     }
-
+    
+    //delete temporarily stored message in Array list
     public void discardMessage(MessageData messageObj) {
-
+        UserDatabase.deleteMessage(messageObj);
     }
-
+    //persitent storage in JSON
     public void storeMessage(MessageData messageObj) {
 
     }

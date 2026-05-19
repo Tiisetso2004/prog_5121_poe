@@ -41,7 +41,6 @@ public class Message {
         }
     }
 
-    //TODO: use substrings and string builder to append message hash
     //first two num of mID (:) and message num (:) first and last words of the message.
     //colons are delimiters.
     public static String createMessageHash(String messageID, int messageNum, String message) {
@@ -64,15 +63,15 @@ public class Message {
 
     //prints all the messages from the start of the program
     public String printMessages() {
-        return "";
+        return UserDatabase.printMessages();
     }
 
     //Returns no of total messages sent
     public int returnTotalMessages() {
-        return 0;
+        return UserDatabase.getMessageCount();
     }
 
-    //store messages objects in JSON
+    //TODO: store message objects in JSON
     public void StoreMessage() {
         
     }
