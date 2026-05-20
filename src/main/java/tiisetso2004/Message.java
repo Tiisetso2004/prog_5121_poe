@@ -1,8 +1,7 @@
 package tiisetso2004;
 
+//TODO: make this metadata generator class after clearing.
 public class Message {
-
-    int messsagesSent;
 
     public Message() {
     }
@@ -13,31 +12,26 @@ public class Message {
 
         for (int i = 0; i < length; i++) {
             int index = (int) (charset.length() * Math.random()); //Math.Random returns 0.0 --> 1.0 cast it to int to get a valid whole number index.    
-            sb.append(charset.charAt(index)); //add a randomly selected character to the string builder object.
+            sb.append(charset.charAt(index)); //add a randomly selected character to the string builder object.            
         }
-        //return it as string matching method return type.
-        return sb.toString();
+
+        String ID = sb.toString(); //convert generated id to a string
+        if(checkMessageID(ID) && Validator.nullCheck(ID)) {
+            System.out.println("Invalid ID generated");
+            return "INVALID ID";
+        } else {
+            return ID;
+        }
     } 
 
     //checks if the ID exceeds the 10 character limit.
-    public boolean checkMessageID(String ID) {
+    public static boolean checkMessageID(String ID) {
         if(Validator.nullCheck(ID) || ID.length() > 10) {
             System.err.println("Ivalid ID: The ID is empty or exceeds 10 character limit");
             return false;
         } else {
             System.out.println("ID sucessfully validated");
             return true;
-        }
-    }
-
-    //reuse static helper defined in Validator class for cellphone number validation.
-    public String checkRecepientCell(String cellphoneNumber) {
-        if(!Validator.checkCellphoneNumber(cellphoneNumber)) {
-            System.err.println(MessageLog.getCellphoneErrorMessage());
-            return MessageLog.getCellphoneErrorMessage();
-        } else {
-            System.out.println(MessageLog.getCellphoneErrorMessage());
-            return cellphoneNumber;
         }
     }
 
@@ -56,23 +50,22 @@ public class Message {
         return messageHash;
     }
 
-    //----------UI----------//
+    //----------UI Caller----------//
     //send, discard or store message options
     public void SendMessage() {
+        QuickChat chat = new QuickChat();
+        chat.draftMessage();
     } 
 
     //prints all the messages from the start of the program
-    public String printMessages() {
-        return UserDatabase.printMessages();
+    public static String printMessages() {
+        System.out.println(UserDatabase.printMessages(UserDatabase.getSavedMessagesList()));
+        return UserDatabase.printMessages(UserDatabase.getSavedMessagesList());
     }
 
-    //Returns no of total messages sent
-    public int returnTotalMessages() {
-        return UserDatabase.getMessageCount();
-    }
-
-    //TODO: store message objects in JSON
-    public void StoreMessage() {
-        
+    //Returns no of total messages 'sent' during program
+    public static int returnTotalMessages() {
+        System.out.println("Total messages sent:"+ UserDatabase.getMessageCount(UserDatabase.getSentMessagesList()));
+        return UserDatabase.getMessageCount(UserDatabase.getSentMessagesList());
     }
 }

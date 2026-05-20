@@ -1,12 +1,29 @@
 package tiisetso2004;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MessageData {
 
     //ensure message contents or metadata cannot be changed by declaring fields as final.
-    private final String message, messageHash, recipient;
+    @JsonProperty("message")
+    private final String message;
+
+    @JsonProperty("messageHash")   
+    private final String messageHash;
+
+    @JsonProperty("recipient")
+    private final String recipient;
+
+    @JsonProperty("Message ID")
     private final String messageID;
 
-    public MessageData(String message, String messageHash, String recipient, String messageID) {
+    @JsonCreator
+    public MessageData(
+        @JsonProperty("message") String message, 
+        @JsonProperty("messageHash") String messageHash, 
+        @JsonProperty("recipient") String recipient, 
+        @JsonProperty("Message ID") String messageID) {
+
         this.message = message;
         this.messageHash = messageHash; //auto generated
         this.messageID = messageID; //auto generated
