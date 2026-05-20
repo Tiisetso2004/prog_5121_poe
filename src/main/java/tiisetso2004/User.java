@@ -2,7 +2,10 @@ package tiisetso2004;
 
 public class User {
 
-    private String fullName, username, cellphoneNumber, password;
+    private String fullName;
+    private String username; 
+    private String cellphoneNumber; 
+    private String password;
     
     //call to parameterized constructor to auto-assign first time users
     public User (String name, String usr, String cell, String pass) { 

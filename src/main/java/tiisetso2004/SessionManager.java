@@ -2,7 +2,7 @@ package tiisetso2004;
 
  /**
  * SessionManager is the UI manager for the application.
- * All designs for the user interface of the program will are made here. 
+ * All sessions for the user interface of the program will be managed here. 
  **/
 
 import java.util.*;
@@ -59,11 +59,11 @@ public class SessionManager {
         LoginManager login = new LoginManager();
         login.registerUser();
     }
-    /*Create internal menu system*/
+    /*TODO:Create internal menu system*/
     public void updateUserDetails() {
 
     }
-    /*Call function from user database*/
+    /*TODO:Call function from user database*/
     public void deleteUser() {
 
     }

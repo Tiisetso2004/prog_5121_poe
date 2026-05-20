@@ -7,7 +7,7 @@ import java.util.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class UserDatabase {
+public class StorageManager {
 
     //adding all users created during instance of program to one static list.
     private static List <User> userLib = new ArrayList<>();

@@ -23,7 +23,7 @@ public class QuickChat {
             String ID = Message.GenerateMessageID(10);
             String messageHash = Message.createMessageHash(ID, messageNum, message);
             MessageData messObj = new MessageData(message, messageHash, contact, ID);
-            UserDatabase.captureMessageDraft(messObj,UserDatabase.getSavedMessagesList());
+            StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
 
             System.out.println("What would you like to do with this message?");
             System.out.println("1.Send message\n2.Store message\n3.Delete message");
@@ -63,11 +63,11 @@ public class QuickChat {
 
     //delete temporarily stored message in Array list
     private void discardMessage(MessageData messageObj) {
-        UserDatabase.deleteMessage(messageObj, UserDatabase.getSavedMessagesList());
+        StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
     }
 
     //persitent storage in JSON file
     private void storeMessage(MessageData messageObj) {
-        UserDatabase.storeMessage(messageObj);
+        StorageManager.storeMessage(messageObj);
     }
 }

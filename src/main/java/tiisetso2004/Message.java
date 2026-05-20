@@ -59,13 +59,13 @@ public class Message {
 
     //prints all the messages from the start of the program
     public static String printMessages() {
-        System.out.println(UserDatabase.printMessages(UserDatabase.getSavedMessagesList()));
-        return UserDatabase.printMessages(UserDatabase.getSavedMessagesList());
+        System.out.println(StorageManager.printMessages(StorageManager.getSavedMessagesList()));
+        return StorageManager.printMessages(StorageManager.getSavedMessagesList());
     }
 
     //Returns no of total messages 'sent' during program
     public static int returnTotalMessages() {
-        System.out.println("Total messages sent:"+ UserDatabase.getMessageCount(UserDatabase.getSentMessagesList()));
-        return UserDatabase.getMessageCount(UserDatabase.getSentMessagesList());
+        System.out.println("Total messages sent:"+ StorageManager.getMessageCount(StorageManager.getSentMessagesList()));
+        return StorageManager.getMessageCount(StorageManager.getSentMessagesList());
     }
 }

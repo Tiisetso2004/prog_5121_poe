@@ -71,7 +71,7 @@ public class LoginManager {
         cellphoneNumber = promptUntilValid(sc, MessageLog.getCellphonePrompt(), Validator::checkCellphoneNumber, MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
         password = promptUntilValid(sc, MessageLog.getPasswordPrompt(), Validator::checkPasswordComplexity, MessageLog.getPasswordErrorMessage(), MessageLog.getPasswordMessage());
         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
-        UserDatabase.addUser(user); //add the user to database
+        StorageManager.addUser(user); //add the user to database
         loginUser(user,sc);
         return returnLoginStatus(user);
     }
