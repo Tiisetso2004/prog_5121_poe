@@ -46,7 +46,7 @@ public class Message {
 
     //----------UI Caller----------//
     //send, discard or store message options
-    public void SendMessage() {
+    public static void SendMessage() {
         QuickChat chat = new QuickChat();
         chat.draftMessage();
     } 

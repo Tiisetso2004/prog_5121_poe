@@ -43,6 +43,7 @@ public class SessionManager {
                     break;
                 case 1:
                     createUser();
+                    Message.SendMessage();
                     break;
                 default:
                     System.err.println("invalid input detected");
