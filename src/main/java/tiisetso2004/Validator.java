@@ -35,29 +35,30 @@ public class Validator {
             System.err.println("Error: input cannot be empty or blank, please fill in this field");
             return false;
         } else {
-            return false;
+            return true;
         }
     }
 
-    /*helper function to compile regex patterns and return true or false.*/
+    /*helper function to recive regex patterns and return true or false.*/
     public static boolean regexReader(Pattern regex, String input) {
         if (!nullCheck(input)) {
             return false;
+        }else {
+            return regex.matcher(input.trim()).matches();
         }
-        return regex.matcher(input).matches();
     }
 
     /*Implementation of the regexReader for validation*/
     public static boolean checkFullName(String name) {
-        return regexReader(NAME_REGEX, name.trim());        
+        return regexReader(NAME_REGEX, name);        
     }  
     
     public static boolean checkUsername(String username) {
-        return regexReader(USERNAME_REGEX, username.trim());
+        return regexReader(USERNAME_REGEX, username);
     }
 
     public static boolean checkCellphoneNumber(String cell) {
-        return regexReader(CELLPHONE_REGEX, cell.trim());
+        return regexReader(CELLPHONE_REGEX, cell);
     }
 
     /*Validation logic for passay library.*/
