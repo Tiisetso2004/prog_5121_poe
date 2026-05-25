@@ -13,13 +13,12 @@ public class QuickChat {
             System.out.println();
 
             for(int i = 0; i < counter; i++) {
-        
-                String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
                 int messageNum = i+1;
+                String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
+
                 System.out.println("======Message no : "+messageNum+" ======");
-                System.out.println("Enter the message:");
-                String text = qcScan.nextLine();
-        
+                String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ",Validator::messageValidator, "Message is too long or is empty","Message ready to send");
+                
                 String message = text.trim();
                 String ID = Message.GenerateMessageID(10);
                 String messageHash = Message.createMessageHash(ID, messageNum, message);
