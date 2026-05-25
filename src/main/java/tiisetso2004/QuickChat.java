@@ -6,41 +6,41 @@ public class QuickChat {
     Scanner qcScan = new Scanner(System.in);
    
     public void draftMessage() {
-        System.out.print("How many messages would you like to create?");
-        int counter = qcScan.nextInt();
-        System.out.println();
+        try { 
+            System.out.print("How many messages would you like to create\n?");
+            String input = qcScan.nextLine();
+            int counter = Integer.parseInt(input);
+            System.out.println();
 
-        for(int i = 0; i > counter; i++) {
-            int messageNum = counter;
-
-            String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber", Validator::checkCellphoneNumber, MessageLog.getCellphoneMessage(), MessageLog.getCellphoneErrorMessage());
-
-            System.out.println("======Message:"+counter+"======");
-            System.out.println("Enter the message:");
-            String text = qcScan.nextLine();
+            for(int i = 0; i < counter; i++) {
         
-            String message = text.trim();
-            String ID = Message.GenerateMessageID(10);
-            String messageHash = Message.createMessageHash(ID, messageNum, message);
-            MessageData messObj = new MessageData(message, messageHash, contact, ID);
-            StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
+                String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
+                int messageNum = i+1;
+                System.out.println("======Message no : "+messageNum+" ======");
+                System.out.println("Enter the message:");
+                String text = qcScan.nextLine();
+        
+                String message = text.trim();
+                String ID = Message.GenerateMessageID(10);
+                String messageHash = Message.createMessageHash(ID, messageNum, message);
+                MessageData messObj = new MessageData(message, messageHash, contact, ID);
+                StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
 
-            System.out.println("What would you like to do with this message?");
-            System.out.println("1.Send message\n2.Store message\n3.Delete message");
-            int choice = qcScan.nextInt();
-
-            try {            
-                switch (choice) {
-                    
-                case 1:
+                System.out.println("What would you like to do with this message?");
+                System.out.println("1.Send message\n3.Delete message");
+                System.out.println("Stored messages feature still in development");
+                String choice = qcScan.nextLine();
+      
+                switch (choice) {      
+                case "1":
                     sendMessage(messObj);
                     break;
                 
-                case 2:
-                    storeMessage(messObj);
-                    break;
+              //case "2":
+                  //storeMessage(messObj);
+                  //break;
 
-                case 3:
+                case "3":
                     discardMessage(messObj);
                     break;  
             
@@ -48,9 +48,9 @@ public class QuickChat {
                     System.out.println("Enter a choice between 1-3");
                     break;
                 }
-            } catch(NumberFormatException e) {
-                System.err.println("Invalid format detected, Input was not a number");
             }
+        } catch(NumberFormatException e) {
+            System.err.println("Invalid input detected, input was not a number");
         }           
     }
 
@@ -69,5 +69,6 @@ public class QuickChat {
     //persitent storage in JSON file
     private void storeMessage(MessageData messageObj) {
         StorageManager.storeMessage(messageObj);
+
     }
 }
