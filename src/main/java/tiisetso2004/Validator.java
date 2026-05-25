@@ -34,8 +34,9 @@ public class Validator {
         if (input == null || input.isBlank()) {  
             System.err.println("Error: input cannot be empty or blank, please fill in this field");
             return false;
+        } else {
+            return false;
         }
-        return true;
     }
 
     /*helper function to compile regex patterns and return true or false.*/

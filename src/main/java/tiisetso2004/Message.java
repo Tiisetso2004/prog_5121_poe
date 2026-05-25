@@ -6,7 +6,7 @@ public class Message {
     public Message() {
     }
 
-    public static String GenerateMessageID(int length) {
+    public final static String GenerateMessageID(int length) {
         String charset = "4682519730"; //define characterset at random.
         StringBuilder sb = new StringBuilder(length); //use string builder for a mutable string object.
 
@@ -14,14 +14,8 @@ public class Message {
             int index = (int) (charset.length() * Math.random()); //Math.Random returns 0.0 --> 1.0 cast it to int to get a valid whole number index.    
             sb.append(charset.charAt(index)); //add a randomly selected character to the string builder object.            
         }
-
-        String ID = sb.toString(); //convert generated id to a string
-        if(checkMessageID(ID) && Validator.nullCheck(ID)) {
-            System.out.println("Invalid ID generated");
-            return "INVALID ID";
-        } else {
-            return ID;
-        }
+        final String ID = sb.toString(); //convert generated id to a string
+        return ID;  
     } 
 
     //checks if the ID exceeds the 10 character limit.
