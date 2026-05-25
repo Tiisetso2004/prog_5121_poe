@@ -20,13 +20,8 @@ public class Message {
 
     //checks if the ID exceeds the 10 character limit.
     public static boolean checkMessageID(String ID) {
-        if(Validator.nullCheck(ID) || ID.length() > 10) {
-            System.err.println("Ivalid ID: The ID is empty or exceeds 10 character limit");
-            return false;
-        } else {
-            System.out.println("ID sucessfully validated");
-            return true;
-        }
+        boolean validId = ID.length() == 10 && Validator.nullCheck(ID);
+        return validId;    
     }
 
     //first two num of mID (:) and message num (:) first and last words of the message.

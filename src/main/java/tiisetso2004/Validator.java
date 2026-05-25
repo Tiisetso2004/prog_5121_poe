@@ -76,12 +76,14 @@ public class Validator {
         } 
     }
 
-    public static String messageValidator(String m) {
-        String message = m.trim();
-        if(!Validator.nullCheck(message) || message.length() > 250) {
-            return "Message is invalid:\nit exceeds 250 characters or is blank";
+    public static boolean messageValidator(String m) {
+        boolean validMessage = Validator.nullCheck(m) && m.length()<=250;
+        if(!validMessage) {
+            System.out.println("Message is invalid:\nit exceeds 250 characters or is blank");
+            return false;
         } else {
-            return message;
+            System.out.println("Message accepted");
+            return validMessage;
         }
     }
 }
