@@ -12,7 +12,7 @@ public class QuickChat {
             int counter = Integer.parseInt(input);
             System.out.println();
 
-            for(int i = 0; i < counter; i++) {
+            for (int i = 0; i < counter; i++) {
                 int messageNum = i+1;
                 String contact = LoginManager.promptUntilValid(qcScan,"Enter the recpient cellnumber: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
 
@@ -54,7 +54,7 @@ public class QuickChat {
     }
 
     private void sendMessage(MessageData messObj) {
-        //save the sent message first
+        //save the message first
         storeMessage(messObj);
         //print out the success message
         System.out.println("Message sent to:"+ messObj.getRecipient());
@@ -65,7 +65,7 @@ public class QuickChat {
         StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
     }
 
-    //persitent storage in JSON file
+    //persistent storage in JSON file
     private void storeMessage(MessageData messageObj) {
         StorageManager.storeMessage(messageObj);
 

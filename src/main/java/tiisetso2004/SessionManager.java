@@ -1,10 +1,5 @@
 package tiisetso2004;
 
- /**
- * SessionManager is the UI manager for the application.
- * All sessions for the user interface of the program will be managed here. 
- **/
-
 import java.util.*;
 
 public class SessionManager {
@@ -34,15 +29,17 @@ public class SessionManager {
                     System.out.println("You chose QUIT, confirm y/n?");
                     capture.nextLine(); //clearing of buffer from next int.
                     String confirm = capture.nextLine();
-                    if(confirm.toLowerCase().equals("y")) {
+                    if(confirm.equalsIgnoreCase("y")) {
                         System.out.println("Quiting.....\nGoodbye");
+                        isRunning = false;
                         System.exit(0);
-                    } else if (confirm.toLowerCase().equals("n")) {
+                    } else if (confirm.equalsIgnoreCase("n")) {
                         System.out.println("You chose to continue");
                     }
                     break;
                 case 1:
                     createUser();
+                    isRunning = false;
                     Message.SendMessage();
                     break;
                 default:
@@ -50,7 +47,7 @@ public class SessionManager {
             }
         } 
         catch (java.util.InputMismatchException e) {
-            System.err.println("Invalid input. Please enter a number."); //catching non numeric input to prevent loop from crashing
+            System.err.println("Invalid input. Please enter a number."); //catching non-numeric input to prevent loop from crashing
             capture.nextLine();
         }
     }

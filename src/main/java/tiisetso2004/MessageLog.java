@@ -104,7 +104,7 @@ public class MessageLog {
         return LoginError;
     }
 
-    public static String getLoginSucessMessage(User user) {
+    public static String getLoginSuccessMessage(User user) {
         return "\nLogin successful, welcome back " + user.getFullName() + ", it is great to see you again";
     }
     
@@ -112,7 +112,7 @@ public class MessageLog {
         return nullUserError;
     }
 
-    public static String getCaptureSucessEntry() {
+    public static String getCaptureSuccessEntry() {
         return captureSucessEntry;
     }
 }

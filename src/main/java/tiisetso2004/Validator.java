@@ -39,7 +39,7 @@ public class Validator {
         }
     }
 
-    /*helper function to recive regex patterns and return true or false.*/
+    /*helper function to receive regex patterns and return true or false.*/
     public static boolean regexReader(Pattern regex, String input) {
         if (!nullCheck(input)) {
             return false;
@@ -83,7 +83,7 @@ public class Validator {
             return false;
         } else {
             System.out.println("Message accepted");
-            return validMessage;
+            return true;
         }
     }
 }
