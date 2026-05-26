@@ -72,6 +72,7 @@ public class StorageManager {
 
     public static void deleteMessage(MessageData obj, List <MessageData> list) {
         list.remove(obj);
+        System.out.println("Message deleted");
     }
 
     public static void storeMessage(MessageData obj) {
@@ -79,7 +80,7 @@ public class StorageManager {
         try {
             String objString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            System.out.println("Failed to save JSON file");
+            System.err.println("Failed to save JSON file");
             e.printStackTrace();
         }
         
@@ -89,7 +90,7 @@ public class StorageManager {
             Files.write(outputPath, mapper.writeValueAsBytes(obj));
         } catch (Exception e) {
             // Failed to write JSON to file
-            System.out.println("Failed to write to JSON file");
+            System.err.println("Failed to write to JSON file");
             e.printStackTrace();
         }
     }

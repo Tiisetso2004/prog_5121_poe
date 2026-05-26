@@ -1,0 +1,8 @@
+References APA:
+
+POE Part1:
+Kucharz, P. (2025, June 6). Guide to Passay. Baeldung. https://www.baeldung.com/java-passay
+GeeksforGeeks. (2025, July 23). Unit testing System.in for input handling in JUnit. https://www.geeksforgeeks.org/advance-java/unit-testing-system-in-for-input-handling-in-junit/
+
+POE Part2:
+CodeSignal. (n.d.). Creating and writing JSON data with Java using Jackson. CodeSignal Learn. https://codesignal.com/learn/courses/handling-json-files-with-java/lessons/creating-and-writing-json-data-with-java-using-jackson

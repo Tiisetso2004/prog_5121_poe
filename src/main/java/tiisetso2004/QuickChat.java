@@ -44,7 +44,7 @@ public class QuickChat {
                     break;  
             
                 default:
-                    System.out.println("Enter a choice between 1-3");
+                    System.out.println("Enter a choice of 1 or 3");
                     break;
                 }
             }
@@ -56,7 +56,7 @@ public class QuickChat {
     private void sendMessage(MessageData messObj) {
         //save the sent message first
         storeMessage(messObj);
-        //print out the message
+        //print out the success message
         System.out.println("Message sent to:"+ messObj.getRecipient());
     }
 

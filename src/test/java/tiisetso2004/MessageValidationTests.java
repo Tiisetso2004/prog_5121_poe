@@ -47,5 +47,7 @@ public class MessageValidationTests {
     void testMessageLengthfail() {
         //use message ID generator to generate 251 char string
         assertFalse(Validator.messageValidator(Message.GenerateMessageID(251)));
+        assertFalse(Validator.messageValidator(""));
+        assertFalse(Validator.messageValidator(null));
     }
 }
