@@ -58,12 +58,12 @@ public class LoginManager {
     }
 
     /**
-     * Call to funtions to register new user.
-     * This is the only non-static funtion.
+     * Call to functions to register new user.
+     * This is the only non-static function.
      * Each instance of this method creates new unique users.
      * User variables are authenticated and added to UserDatabase.
      **/
-     public String registerUser() { 
+     public void registerUser() {
         String fullName, username, cellphoneNumber, password;
         fullName = promptUntilValid(sc, MessageLog.getNamePrompt(), Validator::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
         username = promptUntilValid(sc, MessageLog.getUserNamePrompt(), Validator::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
@@ -72,8 +72,8 @@ public class LoginManager {
         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
         StorageManager.addUser(user); //add the user to database
         loginUser(user,sc);
-        return returnLoginStatus(user);
-    }
+         returnLoginStatus(user);
+     }
 
     /*Function to validate actual login*/
     public static boolean loginUser(User user,Scanner sc) {

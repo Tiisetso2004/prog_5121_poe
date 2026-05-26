@@ -4,7 +4,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +39,7 @@ public class LoginTestAssertTrueFalse {
     })
     @DisplayName("Check for valid names")
     void validName(String names) {
-        //accepts names with hyphenated, accented and additional unicode characters.
+        //accepts names with hyphenated, accented and additional Unicode characters.
         assertTrue(Validator.checkFullName(names));
 
     }
@@ -108,7 +107,7 @@ public class LoginTestAssertTrueFalse {
         "Qwert@ 1", //contains whitespace
         "782988772_jhdocwuob!", // has no uppercase chars
         "JJJ_Okocha_12!", //3+ consecutive repeating chars
-        "This_is_a_v3ry_long_p@22word_but_correctly_ formatted_passworD" //exceeds 30 character limit
+        "This_is_a_v3ry_long_p@22word_but_correctly_ formatted_passworD" //exceeds 30-character limit
 
     })    @DisplayName("Check for invalid password formats")
     void invalidPasswordFormat(String invalidPasswords) {
@@ -142,7 +141,7 @@ public class LoginTestAssertTrueFalse {
 
     /*Login user will return false messaging for null user objects or mismatched variables*/
     @Test
-    @DisplayName("Unsucessful Login Test")
+    @DisplayName("Unsuccessful Login Test")
     void falseLoginTest() {
         User testUser = new User("Kyle Adams", "kyl_1", "+27838968976", "Ch&&sec@ke99");
         // Simulate the user typing the incorrect username, password or both

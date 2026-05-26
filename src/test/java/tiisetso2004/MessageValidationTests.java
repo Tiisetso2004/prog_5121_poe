@@ -16,8 +16,8 @@ public class MessageValidationTests {
         "7913264552",
         "2514789652"
     })
-    @DisplayName("Sucess case message ID validation tests")
-    void testMessageIDValidationSucess(String input) {
+    @DisplayName("Success case message ID validation tests")
+    void testMessageIDValidationSuccess(String input) {
         assertTrue(Message.checkMessageID(input));        
     }
 
@@ -30,21 +30,21 @@ public class MessageValidationTests {
         "450", //short
         "55",
     })
-    @DisplayName("Sucess case message ID validation tests")
+    @DisplayName("Success case message ID validation tests")
     void testMessageIDValidationFail(String input) {
         assertFalse(Message.checkMessageID(input));        
     }
     
     @Test
     @DisplayName("Success case for message length validation")
-    void testMessageLengthSucess() {
-        assertTrue(Validator.messageValidator("Hi Keegan did you recieve the payment?"));
+    void testMessageLengthSuccess() {
+        assertTrue(Validator.messageValidator("Hi Keegan did you receive the payment?"));
         assertTrue(Validator.messageValidator("    This a test message     "));
     }
 
     @Test
     @DisplayName("Failure case for message length validation")
-    void testMessageLengthfail() {
+    void testMessageLengthFail() {
         //use message ID generator to generate 251 char string
         assertFalse(Validator.messageValidator(Message.GenerateMessageID(251)));
         assertFalse(Validator.messageValidator(""));

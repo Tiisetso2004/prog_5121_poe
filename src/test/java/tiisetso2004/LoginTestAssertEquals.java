@@ -35,7 +35,7 @@ public class LoginTestAssertEquals {
     })
     @DisplayName("Check for valid names")
     void validName(String names) {
-        //accepts names with hyphenated, accented and additional unicode characters. 
+        //accepts names with hyphenated, accented and additional Unicode characters.
         assertEquals(true, Validator.checkFullName(names));
 
     }
@@ -103,7 +103,7 @@ public class LoginTestAssertEquals {
         "Qwert@ 1", //contains whitespace
         "782988772_jhdocwuob!", // has no uppercase chars
         "JJJ_Okocha_12!", //3+ consecutive repeating chars
-        "This_is_a_v3ry_long_p@22word_but_correctly_ formatted_passworD" //exceeds 30 character limit
+        "This_is_a_v3ry_long_p@22word_but_correctly_ formatted_passworD" //exceeds 30-character limit
 
     })    @DisplayName("Check for invalid password formats")
     void invalidPasswordFormat(String invalidPasswords) {
