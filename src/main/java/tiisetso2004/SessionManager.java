@@ -21,13 +21,13 @@ public class SessionManager {
         System.out.println("Choose your option:");
         System.out.println("0.QUIT \n1.Create new user");
         try {
-            int choice  = capture.nextInt();
+            String scannerInput = capture.nextLine();
+            int choice = Integer.parseInt(scannerInput);
 
             //as program grows add new cases with function calls.
             switch (choice) {
                 case 0:
                     System.out.println("You chose QUIT, confirm y/n?");
-                    capture.nextLine(); //clearing of buffer from next int.
                     String confirm = capture.nextLine();
                     if(confirm.equalsIgnoreCase("y")) {
                         System.out.println("Quiting.....\nGoodbye");
@@ -45,10 +45,8 @@ public class SessionManager {
                 default:
                     System.err.println("invalid input detected");
             }
-        } 
-        catch (java.util.InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.err.println("Invalid input. Please enter a number."); //catching non-numeric input to prevent loop from crashing
-            capture.nextLine();
         }
     }
 }

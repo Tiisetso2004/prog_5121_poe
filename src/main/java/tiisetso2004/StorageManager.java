@@ -4,8 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException; // Replaces JsonProcessingException
+import tools.jackson.databind.ObjectMapper;
 
 public class StorageManager {
 
@@ -79,7 +79,7 @@ public class StorageManager {
         ObjectMapper mapper = new ObjectMapper();
         try {
             String objString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             System.err.println("Failed to save JSON file");
             e.printStackTrace();
         }
