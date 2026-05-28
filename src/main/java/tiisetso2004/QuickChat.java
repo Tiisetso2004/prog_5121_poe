@@ -1,4 +1,5 @@
 package tiisetso2004;
+
 import java.util.*;
 
 public class QuickChat {
