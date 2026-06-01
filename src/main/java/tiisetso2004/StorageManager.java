@@ -1,18 +1,14 @@
 package tiisetso2004;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-import tools.jackson.core.JacksonException; // Replaces JsonProcessingException
-import tools.jackson.databind.ObjectMapper;
 
 public class StorageManager {
 
     //adding all users created during instance of program to one static list.
     private static List <User> userLib = new ArrayList<>();
-    private static List <MessageData> savedMessagesList =  new ArrayList<>();
+    private static List <MessageData> allMessagesList =  new ArrayList<>();
     private static List <MessageData> sentMessagesList = new ArrayList<>();
+    private static List <MessageData> discardedMessagesList = new ArrayList<>();
 
     //check if user objects are null
     public static boolean addUser(User user) {
@@ -37,7 +33,7 @@ public class StorageManager {
     }
 
     public static List<MessageData> getSavedMessagesList() {
-        return savedMessagesList;
+        return allMessagesList;
     }
 
     public static List<MessageData> getSentMessagesList() {
@@ -70,28 +66,23 @@ public class StorageManager {
         return messages.toString().trim(); //trim the trailing whitespace
     }
 
-    public static void deleteMessage(MessageData obj, List <MessageData> list) {
-        list.remove(obj);
-        System.out.println("Message deleted");
+    public static boolean deleteMessage(MessageData obj, List <MessageData> list) {
+        if(MessageHandler.messageOperationHandler(obj, list)) {
+            list.remove(obj);
+            System.out.println("MetadataGenerator successfully deleted");
+            return true;
+        }
+        System.err.println("Failed to delete, message");
+        return false;
     }
 
-    public static void storeMessage(MessageData obj) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String objString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-        } catch (JacksonException e) {
-            System.err.println("Failed to save JSON file");
-            e.printStackTrace();
+    public static boolean storeMessage(MessageData obj, List <MessageData> list) {
+        if(MessageHandler.messageOperationHandler(obj, list)) {
+            list.remove(obj);
+            System.out.println("MetadataGenerator successfully stored to list");
+            return true;
         }
-        
-        try {
-            Path outputPath = Paths.get("message_list.json");
-            // write the object as JSON bytes to the file
-            Files.write(outputPath, mapper.writeValueAsBytes(obj));
-        } catch (Exception e) {
-            // Failed to write JSON to file
-            System.err.println("Failed to write to JSON file");
-            e.printStackTrace();
-        }
+        System.err.println("Error storing message to list");
+        return false;
     }
 }
