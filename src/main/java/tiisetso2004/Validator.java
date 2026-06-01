@@ -29,23 +29,28 @@ public class Validator {
     private Validator() {
     }
 
-    //checks if any string input is null or blank.
-    public static boolean nullCheck(String input) { 
-        if (input == null || input.isBlank()) {  
-            System.err.println("Error: input cannot be empty or blank, please fill in this field");
-            return false;
-        } else {
+    //checks if any string input is null, blank or contains literal string "null".
+    public static boolean nullCheck(String input) {
+        if (input == null || input.isBlank() || input.equalsIgnoreCase("null")) {
+            System.err.println("Error: input cannot be empty, blank or contain string literal 'null', please fill in this field");
             return true;
         }
+        return false;
     }
 
     /*helper function to receive regex patterns and return true or false.*/
     public static boolean regexReader(Pattern regex, String input) {
-        if (!nullCheck(input)) {
+        //check if input is null
+        if (nullCheck(input)) {
             return false;
-        }else {
-            return regex.matcher(input.trim()).matches();
         }
+        //check if regex is null
+        if (regex == null) {
+            System.err.println("Pattern regex is null");
+            return false;
+        }
+        //returns only if null checks are passed
+        return regex.matcher(input.trim()).matches();
     }
 
     /*Implementation of the regexReader for validation*/
@@ -63,7 +68,7 @@ public class Validator {
 
     /*Validation logic for passay library.*/
     public static boolean checkPasswordComplexity(String password) {
-        if (!nullCheck(password)) {
+        if (nullCheck(password)) {
             return false;
         }
         RuleResult result = VALIDATOR.validate(new PasswordData(password));
@@ -74,16 +79,5 @@ public class Validator {
             messages.forEach(System.out::println); //gets messages for invalid inputs from passay library.
             return false; //returns false if the argument is invalid.
         } 
-    }
-
-    public static boolean messageValidator(String m) {
-        boolean validMessage = Validator.nullCheck(m) && m.length()<=250;
-        if(!validMessage) {
-            System.out.println("Message is invalid:\nit exceeds 250 characters or is blank");
-            return false;
-        } else {
-            System.out.println("Message accepted");
-            return true;
-        }
     }
 }
