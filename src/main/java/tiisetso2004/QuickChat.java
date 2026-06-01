@@ -10,68 +10,87 @@ public class QuickChat {
    
     public void draftMessage() {
         try {
-            while(!isValidCount) {
-                System.out.print("\nEnter the amount of messages you wish to send: ");
+            while (!isValidCount) {
+                System.out.print("\nEnter the amount of messages you wish to send or type 0 to quit: ");
                 String input =  qcScan.nextLine();
                 counter = Integer.parseInt(input);
+
+                //user exit condition
+                if (counter == 0) {
+                    System.out.println("You chose to quit...\nGoodbye");
+                    break;
+                }
+
                 isValidCount = true;
             }
         } catch (NumberFormatException e) {
             System.err.println("Input was not a number, please enter a number");
+        } catch (NullPointerException pointerException) {
+            System.err.println("Input is empty");
         }
 
         for (int i = 0; i < counter; i++) {
             int messageNum = i+1;
             String contact = LoginManager.promptUntilValid(qcScan,"Enter the recipient's cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
 
-            System.out.println("======Message no : "+messageNum+" ======");
-            String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ",Validator::messageValidator, "Message is too long or is empty","Message ready to send");
+            System.out.println("======MetadataGenerator no : "+messageNum+" ======");
+            String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ", MessageHandler::messageValidator, "MetadataGenerator is too long or is empty","MetadataGenerator ready to send");
                 
             String message = text.trim();
-            String ID = Message.GenerateMessageID(10);
-            String messageHash = Message.createMessageHash(ID, messageNum, message);
+            String ID = MetadataGenerator.GenerateMessageID(10);
+            String messageHash = MetadataGenerator.createMessageHash(ID, messageNum, message);
             MessageData messObj = new MessageData(message, messageHash, contact, ID);
             StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
 
-            System.out.println("What would you like to do with this message?");
-            System.out.println("1.Send message\n2.Configure stored messages\n3.Delete message");
-            String choice = qcScan.nextLine();
-      
-            switch (choice) {
-                case "1":
-                    sendMessage(messObj);
-                    break;
-                
-                case "2":
-                   storeMessage(messObj);
-                   break;
+            boolean continueLoop = true;
+            while (continueLoop) {
+                try {
+                    System.out.println("What would you like to do with this message?");
+                    System.out.println("1.Send message\n2.Configure stored messages\n3.Delete message\nType 'quit' to exit");
+                    String choice = qcScan.nextLine();
 
-                case "3":
-                    discardMessage(messObj);
-                    break;  
-            
-                default:
-                    System.out.println("Enter a choice of 1 or 3");
-                    break;
+                    //user exit condition
+                    if (choice.equalsIgnoreCase("quit")) {
+                        continueLoop = false;
+                        break;
+                    }
+
+                    switch (choice) {
+                        case "1":
+                            sendMessage(messObj);
+                            break;
+
+                        case "2":
+                            storeMessage(messObj);
+                            break;
+
+                        case "3":
+                            discardMessage(messObj);
+                            break;
+
+                        default:
+                            System.out.println("Enter a choice of 1 or 3");
+                            break;
+                    }
+                } catch (NullPointerException npe) {
+                    System.err.println("Input is empty");
+                }
             }
         }
     }
 
-    private void sendMessage(MessageData messObj) {
-        //save the message first
-        storeMessage(messObj);
-        //print out the success message
-        System.out.println("Message sent to:"+ messObj.getRecipient());
+    private boolean sendMessage(MessageData messObj) {
+        return StorageManager.storeMessage(messObj, StorageManager.getSavedMessagesList()) &&
+               StorageManager.storeMessage(messObj, StorageManager.getSentMessagesList());
     }
 
     //delete temporarily stored message in Array list
-    private void discardMessage(MessageData messageObj) {
-        StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
+    private boolean discardMessage(MessageData messageObj) {
+        return StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
     }
 
     //persistent storage in JSON file
-    private void storeMessage(MessageData messageObj) {
-        StorageManager.storeMessage(messageObj);
-
+    private boolean storeMessage(MessageData messageObj) {
+       return StorageManager.storeMessage(messageObj,StorageManager.getSavedMessagesList());
     }
 }
