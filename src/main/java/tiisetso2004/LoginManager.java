@@ -14,6 +14,11 @@ public class LoginManager {
             String input = sc.nextLine();
             System.out.println();//UX addition: terminal spacing.
 
+            if (input.equalsIgnoreCase("quit")) {
+                System.out.println("Quitting...\nGoodbye");
+                return "aborted operation";
+            }
+
             if (validator.test(input)) {
                 System.out.println(successMessage);
                 return input;
@@ -72,7 +77,7 @@ public class LoginManager {
         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
         StorageManager.addUser(user); //add the user to database
         loginUser(user,sc);
-         returnLoginStatus(user);
+        returnLoginStatus(user);
      }
 
     /*Function to validate actual login*/
