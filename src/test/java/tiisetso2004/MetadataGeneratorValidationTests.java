@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MessageValidationTests {
+public class MetadataGeneratorValidationTests {
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -17,8 +17,8 @@ public class MessageValidationTests {
         "2514789652"
     })
     @DisplayName("Success case message ID validation tests")
-    void testMessageIDValidationSuccess(String input) {
-        assertTrue(Message.checkMessageID(input));        
+    void testMetadataGeneratorIDValidationSuccess(String input) {
+        assertTrue(MessageHandler.validateMessageID(input));
     }
 
     @ParameterizedTest
@@ -30,24 +30,24 @@ public class MessageValidationTests {
         "450", //short
         "55",
     })
-    @DisplayName("Success case message ID validation tests")
-    void testMessageIDValidationFail(String input) {
-        assertFalse(Message.checkMessageID(input));        
+    @DisplayName("Failure case message ID validation tests")
+    void testMetadataGeneratorIDValidationFail(String input) {
+        assertFalse(MessageHandler.validateMessageID(input));
     }
     
     @Test
     @DisplayName("Success case for message length validation")
-    void testMessageLengthSuccess() {
-        assertTrue(Validator.messageValidator("Hi Keegan did you receive the payment?"));
-        assertTrue(Validator.messageValidator("    This a test message     "));
+    void testMetadataGeneratorLengthSuccess() {
+        assertTrue(MessageHandler.messageValidator("Hi Keegan did you receive the payment?"));
+        assertTrue(MessageHandler.messageValidator("    This a test message     "));
     }
 
     @Test
     @DisplayName("Failure case for message length validation")
-    void testMessageLengthFail() {
+    void testMetadataGeneratorLengthFail() {
         //use message ID generator to generate 251 char string
-        assertFalse(Validator.messageValidator(Message.GenerateMessageID(251)));
-        assertFalse(Validator.messageValidator(""));
-        assertFalse(Validator.messageValidator(null));
+        assertFalse(MessageHandler.messageValidator(MetadataGenerator.GenerateMessageID(251)));
+        assertFalse(MessageHandler.messageValidator(""));
+        assertFalse(MessageHandler.messageValidator(null));
     }
 }
