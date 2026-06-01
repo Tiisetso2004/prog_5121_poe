@@ -7,7 +7,7 @@ public class User {
     private String cellphoneNumber; 
     private String password;
     
-    //call to parameterized constructor to auto-assign first time users
+    //call to parameterised constructor to auto-assign first time users
     public User (String name, String usr, String cell, String pass) { 
         this.fullName = name;
         this.username = usr;
