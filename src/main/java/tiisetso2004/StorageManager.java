@@ -49,13 +49,12 @@ public class StorageManager {
     }
 
     //reusing same logic store messages temporarily
-    public static boolean captureMessageDraft(MessageData obj, List <MessageData> list) {
+    public static void captureMessageDraft(MessageData obj, List <MessageData> list) {
         if (obj != null) {
             list.add(obj);
-            return true;
         } else {
-            return false;
-        }        
+            System.err.println("Failed to capture message");
+        }
     }
 
     public static String printMessages(List <MessageData> list) {
