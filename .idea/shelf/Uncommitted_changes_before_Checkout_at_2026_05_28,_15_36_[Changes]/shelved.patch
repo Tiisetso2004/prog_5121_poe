@@ -1,0 +1,32 @@
+Index: src/main/java/tiisetso2004/QuickChat.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package tiisetso2004;\nimport java.util.*;\n\npublic class QuickChat {\n\n    Scanner qcScan = new Scanner(System.in);\n   \n    public void draftMessage() {\n        try { \n            System.out.print(\"How many messages would you like to create\\n?\");\n            String input = qcScan.nextLine();\n            int counter = Integer.parseInt(input);\n            System.out.println();\n\n            for (int i = 0; i < counter; i++) {\n                int messageNum = i+1;\n                String contact = LoginManager.promptUntilValid(qcScan,\"Enter the recpient cellnumber: \", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());\n\n                System.out.println(\"======Message no : \"+messageNum+\" ======\");\n                String text = LoginManager.promptUntilValid(qcScan,\"Enter your message: \",Validator::messageValidator, \"Message is too long or is empty\",\"Message ready to send\");\n                \n                String message = text.trim();\n                String ID = Message.GenerateMessageID(10);\n                String messageHash = Message.createMessageHash(ID, messageNum, message);\n                MessageData messObj = new MessageData(message, messageHash, contact, ID);\n                StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());\n\n                System.out.println(\"What would you like to do with this message?\");\n                System.out.println(\"1.Send message\\n3.Delete message\");\n                System.out.println(\"Stored messages feature still in development\");\n                String choice = qcScan.nextLine();\n      \n                switch (choice) {      \n                case \"1\":\n                    sendMessage(messObj);\n                    break;\n                \n              //case \"2\":\n                  //storeMessage(messObj);\n                  //break;\n\n                case \"3\":\n                    discardMessage(messObj);\n                    break;  \n            \n                default:\n                    System.out.println(\"Enter a choice of 1 or 3\");\n                    break;\n                }\n            }\n        } catch(NumberFormatException e) {\n            System.err.println(\"Invalid input detected, input was not a number\");\n        }           \n    }\n\n    private void sendMessage(MessageData messObj) {\n        //save the message first\n        storeMessage(messObj);\n        //print out the success message\n        System.out.println(\"Message sent to:\"+ messObj.getRecipient());\n    }\n\n    //delete temporarily stored message in Array list\n    private void discardMessage(MessageData messageObj) {\n        StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());\n    }\n\n    //persistent storage in JSON file\n    private void storeMessage(MessageData messageObj) {\n        StorageManager.storeMessage(messageObj);\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/tiisetso2004/QuickChat.java b/src/main/java/tiisetso2004/QuickChat.java
+--- a/src/main/java/tiisetso2004/QuickChat.java	(revision d7bb43e391fba6a477742e5f22ae512164507b88)
++++ b/src/main/java/tiisetso2004/QuickChat.java	(date 1779803452186)
+@@ -1,4 +1,5 @@
+ package tiisetso2004;
++
+ import java.util.*;
+ 
+ public class QuickChat {
+Index: src/main/java/tiisetso2004/MessageData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package tiisetso2004;\nimport com.fasterxml.jackson.annotation.JsonCreator;\nimport com.fasterxml.jackson.annotation.JsonProperty;\n\npublic class MessageData {\n\n    //ensure message contents or metadata cannot be changed by declaring fields as final.\n    @JsonProperty(\"message\")\n    private final String message;\n\n    @JsonProperty(\"messageHash\")   \n    private final String messageHash;\n\n    @JsonProperty(\"recipient\")\n    private final String recipient;\n\n    @JsonProperty(\"Message ID\")\n    private final String messageID;\n\n    @JsonCreator\n    public MessageData(\n        @JsonProperty(\"message\") String message, \n        @JsonProperty(\"messageHash\") String messageHash, \n        @JsonProperty(\"recipient\") String recipient, \n        @JsonProperty(\"Message ID\") String messageID) {\n\n        this.message = message;\n        this.messageHash = messageHash; //auto generated\n        this.messageID = messageID; //auto generated\n        this.recipient = recipient;\n    }\n    \n    //getters only to retrieve values for message metadata\n\n    public String getMessage() {\n        return message;\n    }\n\n    public String getMessageHash() {\n        return messageHash;\n    }\n\n    public String getMessageID() {\n        return messageID;\n    }\n\n    public String getRecipient() {\n        return recipient;\n    }   \n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/tiisetso2004/MessageData.java b/src/main/java/tiisetso2004/MessageData.java
+--- a/src/main/java/tiisetso2004/MessageData.java	(revision d7bb43e391fba6a477742e5f22ae512164507b88)
++++ b/src/main/java/tiisetso2004/MessageData.java	(date 1779803452201)
+@@ -1,4 +1,5 @@
+ package tiisetso2004;
++
+ import com.fasterxml.jackson.annotation.JsonCreator;
+ import com.fasterxml.jackson.annotation.JsonProperty;
+ 

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="38303756-f75a-4786-9a04-9e0e0edc16c5" name="Changes" comment="final branch commit">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2026_05_28,_15_36_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2026_05_28__15_36__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Tiisetso2004&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Tiisetso2004/prog_5121_poe&quot;,
+    &quot;accountId&quot;: &quot;67201358-c791-4ad1-b6df-56d200a370c5&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;Tiisetso2004&quot;,
+    &quot;repository&quot;: &quot;prog_5121_poe&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/test/java/tiisetso2004/LoginTestAssertTrueFalse.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3EGLBRUAXs6KTmLW0WXleeX83UU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Main.executor": "Run",
+    "JUnit.LoginTestAssertEquals.executor": "Run",
+    "JUnit.LoginTestAssertTrueFalse.trueLoginTests.executor": "Run",
+    "JUnit.MessageClassTest.executor": "Run",
+    "JUnit.MessageValidationTests.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "MessagingFeatureBranch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/legend004/Documents/DISD 2026/PROG_5121/POE/prog_5121_poe",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tiisetso2004.Main" />
+      <module name="prog_5121_poe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tiisetso2004.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTestAssertEquals" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prog_5121_poe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tiisetso2004.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tiisetso2004" />
+      <option name="MAIN_CLASS_NAME" value="tiisetso2004.LoginTestAssertEquals" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTestAssertTrueFalse.trueLoginTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prog_5121_poe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tiisetso2004.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tiisetso2004" />
+      <option name="MAIN_CLASS_NAME" value="tiisetso2004.LoginTestAssertTrueFalse" />
+      <option name="METHOD_NAME" value="trueLoginTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MessageClassTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prog_5121_poe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tiisetso2004.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tiisetso2004" />
+      <option name="MAIN_CLASS_NAME" value="tiisetso2004.MessageClassTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MessageValidationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prog_5121_poe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tiisetso2004.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tiisetso2004" />
+      <option name="MAIN_CLASS_NAME" value="tiisetso2004.MessageValidationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MessageValidationTests" />
+        <item itemvalue="JUnit.MessageClassTest" />
+        <item itemvalue="JUnit.LoginTestAssertTrueFalse.trueLoginTests" />
+        <item itemvalue="JUnit.LoginTestAssertEquals" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="38303756-f75a-4786-9a04-9e0e0edc16c5" name="Changes" comment="" />
+      <created>1779799824389</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779799824389</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Migrated Project to IntelliJ.&#10;Minor improvements and syntax corrections made in comments and functions.">
+      <option name="closed" value="true" />
+      <created>1779802303145</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779802303145</updated>
+    </task>
+    <task id="LOCAL-00002" summary="&#10;Minor improvements and syntax corrections.">
+      <option name="closed" value="true" />
+      <created>1779802954488</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779802954488</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&#10;Minor improvements and syntax corrections.">
+      <option name="closed" value="true" />
+      <created>1779802985199</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779802985199</updated>
+    </task>
+    <task id="LOCAL-00004" summary="New GSON library addition to References.txt">
+      <option name="closed" value="true" />
+      <created>1779986424352</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779986424352</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Addition of GSON dependency in pom.xml config file; centralised external dependencies across entire project.">
+      <option name="closed" value="true" />
+      <created>1779990487281</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779990487281</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added case to quit during feedback loop execution">
+      <option name="closed" value="true" />
+      <created>1780311043515</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780311043516</updated>
+    </task>
+    <task id="LOCAL-00007" summary="recompiled btyecode">
+      <option name="closed" value="true" />
+      <created>1780311232541</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1780311232541</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Renamed to Message.java to MetadataGenerator.java">
+      <option name="closed" value="true" />
+      <created>1780311377011</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780311377011</updated>
+    </task>
+    <task id="LOCAL-00009" summary="New Class: MessageHandler.java to streamline message validation and related operations">
+      <option name="closed" value="true" />
+      <created>1780311456853</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1780311456853</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Refactor: Streamlined if-else blocks and null handling">
+      <option name="closed" value="true" />
+      <created>1780311755576</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1780311755576</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Removed: jackson imports and related serialization">
+      <option name="closed" value="true" />
+      <created>1780312068165</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312068165</updated>
+    </task>
+    <task id="LOCAL-00012" summary="General refactor">
+      <option name="closed" value="true" />
+      <created>1780312105728</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312105728</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactoring of menu for exception handling">
+      <option name="closed" value="true" />
+      <created>1780312180365</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312180365</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Refactoring of menu for NPE handling">
+      <option name="closed" value="true" />
+      <created>1780312399282</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312399282</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactor: Removed unused imports.&#10;&#10;New: storage, deletion, printing functions added">
+      <option name="closed" value="true" />
+      <created>1780312588638</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312588638</updated>
+    </task>
+    <task id="LOCAL-00016" summary="General refactor">
+      <option name="closed" value="true" />
+      <created>1780312614477</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312614477</updated>
+    </task>
+    <task id="LOCAL-00017" summary="General refactor">
+      <option name="closed" value="true" />
+      <created>1780312639727</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312639727</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Additional Commits: .class files">
+      <option name="closed" value="true" />
+      <created>1780312688019</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1780312688019</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Minor edits">
+      <option name="closed" value="true" />
+      <created>1780499778797</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1780499778797</updated>
+    </task>
+    <task id="LOCAL-00020" summary="final branch commit">
+      <option name="closed" value="true" />
+      <created>1780500606883</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1780500606888</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Migrated Project to IntelliJ.&#10;Minor improvements and syntax corrections made in comments and functions." />
+    <MESSAGE value="&#10;Minor improvements and syntax corrections." />
+    <MESSAGE value="New GSON library addition to References.txt" />
+    <MESSAGE value="Addition of GSON dependency in pom.xml config file; centralised external dependencies across entire project." />
+    <MESSAGE value="Added case to quit during feedback loop execution" />
+    <MESSAGE value="recompiled btyecode" />
+    <MESSAGE value="Renamed to Message.java to MetadataGenerator.java" />
+    <MESSAGE value="New Class: MessageHandler.java to streamline message validation and related operations" />
+    <MESSAGE value="Refactor: Streamlined if-else blocks and null handling" />
+    <MESSAGE value="Removed: jackson imports and related serialization" />
+    <MESSAGE value="Refactoring of menu for exception handling" />
+    <MESSAGE value="Refactoring of menu for NPE handling" />
+    <MESSAGE value="Refactor: Removed unused imports.&#10;&#10;New: storage, deletion, printing functions added" />
+    <MESSAGE value="General refactor" />
+    <MESSAGE value="Additional Commits: .class files" />
+    <MESSAGE value="Minor edits" />
+    <MESSAGE value="final branch commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="final branch commit" />
+    <option name="LAST_CHUNK_COMMIT_MESSAGE" value="R" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
