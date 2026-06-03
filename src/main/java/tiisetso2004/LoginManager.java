@@ -63,7 +63,7 @@ public class LoginManager {
      * Each instance of this method creates new unique users.
      * User variables are authenticated and added to UserDatabase.
      **/
-     public void registerUser() {
+     public String registerUser() {
         String fullName, username, cellphoneNumber, password;
         fullName = promptUntilValid(sc, MessageLog.getNamePrompt(), Validator::checkFullName, MessageLog.getNameErrorMessage(), MessageLog.getNameMessage());
         username = promptUntilValid(sc, MessageLog.getUserNamePrompt(), Validator::checkUsername, MessageLog.getUsernameErrorMessage(), MessageLog.getUsernameMessage());
@@ -72,7 +72,7 @@ public class LoginManager {
         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
         StorageManager.addUser(user); //add the user to database
         loginUser(user,sc);
-         returnLoginStatus(user);
+        return returnLoginStatus(user);
      }
 
     /*Function to validate actual login*/

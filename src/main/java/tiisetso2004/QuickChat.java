@@ -23,7 +23,7 @@ public class QuickChat {
             int messageNum = i+1;
             String contact = LoginManager.promptUntilValid(qcScan,"Enter the recipient's cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
 
-            System.out.println("======Message no : "+messageNum+" ======");
+            System.out.println("====== Message no : "+messageNum+" ======");
             String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ",Validator::messageValidator, "Message is too long or is empty","Message ready to send");
                 
             String message = text.trim();
@@ -33,7 +33,7 @@ public class QuickChat {
             StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
 
             System.out.println("What would you like to do with this message?");
-            System.out.println("1.Send message\n2.Configure stored messages\n3.Delete message");
+            System.out.println("1.Send message\n2.Store Message\n3.Delete message");
             String choice = qcScan.nextLine();
       
             switch (choice) {
