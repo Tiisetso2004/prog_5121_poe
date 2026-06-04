@@ -6,9 +6,9 @@ public class StorageManager {
 
     //adding all users created during instance of program to one static list.
     private static List <User> userLib = new ArrayList<>();
-    private static List <MessageData> allMessagesList =  new ArrayList<>();
-    private static List <MessageData> sentMessagesList = new ArrayList<>();
-    private static List <MessageData> discardedMessagesList = new ArrayList<>();
+    private static List <Message> allMessagesList =  new ArrayList<>();
+    private static List <Message> sentMessagesList = new ArrayList<>();
+    private static List <Message> discardedMessagesList = new ArrayList<>();
 
     //check if user objects are null
     public static boolean addUser(User user) {
@@ -32,24 +32,24 @@ public class StorageManager {
         userLib.remove(user);
     }
 
-    public static List<MessageData> getSavedMessagesList() {
+    public static List<Message> getSavedMessagesList() {
         return allMessagesList;
     }
 
-    public static List<MessageData> getSentMessagesList() {
+    public static List<Message> getSentMessagesList() {
         return sentMessagesList;
     }
 
-    public static int getMessageCount(List <MessageData> list) {
+    public static int getMessageCount(List <Message> list) {
         return list.size();
     }
 
-    public static List <MessageData> getMessages(List <MessageData> list) {
+    public static List <Message> getMessages(List <Message> list) {
         return Collections.unmodifiableList(list);
     }
 
     //reusing same logic store messages temporarily
-    public static void captureMessageDraft(MessageData obj, List <MessageData> list) {
+    public static void captureMessageDraft(Message obj, List <Message> list) {
         if (obj != null) {
             list.add(obj);
         } else {
@@ -57,15 +57,15 @@ public class StorageManager {
         }
     }
 
-    public static String printMessages(List <MessageData> list) {
+    public static String printMessages(List <Message> list) {
         StringBuilder messages = new StringBuilder();
-        for (MessageData messageData : list) {
-            messages.append(messageData.getMessage()).append("\n");
+        for (Message message : list) {
+            messages.append(message.getMessage()).append("\n");
         }
         return messages.toString().trim(); //trim the trailing whitespace
     }
 
-    public static boolean deleteMessage(MessageData obj, List <MessageData> list) {
+    public static boolean deleteMessage(Message obj, List <Message> list) {
         if(MessageHandler.messageOperationHandler(obj, list)) {
             list.remove(obj);
             System.out.println("MetadataGenerator successfully deleted");
@@ -75,7 +75,7 @@ public class StorageManager {
         return false;
     }
 
-    public static boolean storeMessage(MessageData obj, List <MessageData> list) {
+    public static boolean storeMessage(Message obj, List <Message> list) {
         if(MessageHandler.messageOperationHandler(obj, list)) {
             list.remove(obj);
             System.out.println("MetadataGenerator successfully stored to list");

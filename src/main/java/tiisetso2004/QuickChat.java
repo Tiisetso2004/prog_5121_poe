@@ -39,7 +39,7 @@ public class QuickChat {
             String message = text.trim();
             String ID = MetadataGenerator.GenerateMessageID(10);
             String messageHash = MetadataGenerator.createMessageHash(ID, messageNum, message);
-            MessageData messObj = new MessageData(message, messageHash, contact, ID);
+            Message messObj = new Message(message, messageHash, contact, ID);
             StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
 
             boolean continueLoop = true;
@@ -79,18 +79,18 @@ public class QuickChat {
         }
     }
 
-    private boolean sendMessage(MessageData messObj) {
+    private boolean sendMessage(Message messObj) {
         return StorageManager.storeMessage(messObj, StorageManager.getSavedMessagesList()) &&
                StorageManager.storeMessage(messObj, StorageManager.getSentMessagesList());
     }
 
     //delete temporarily stored message in Array list
-    private boolean discardMessage(MessageData messageObj) {
+    private boolean discardMessage(Message messageObj) {
         return StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
     }
 
     //persistent storage in JSON file
-    private boolean storeMessage(MessageData messageObj) {
+    private boolean storeMessage(Message messageObj) {
        return StorageManager.storeMessage(messageObj,StorageManager.getSavedMessagesList());
     }
 }

@@ -14,7 +14,7 @@ public class MessageLog {
     private final static String nameErrorMessage = "Invalid entry detected, enter your proper name and surname";
     private final static String passwordErrorMessage  = "Please try again and follow the above instructions for a valid password ^";
 
-    /*Sucess messaging*/
+    /*Success messaging*/
     private final static String usernameMessage = "Username successfully captured";
     private final static String cellphoneMessage = "Cellphone number successfully captured";
     private final static String nameMessage =  "Identity confirmed";
@@ -31,9 +31,9 @@ public class MessageLog {
     private final static String passwordLogin = "\nRe-enter your password to login: ";
     private final static String authenticatedUsernameMessage = "Username confirmed";
     private final static String authenticatedPasswordMessage = "Password confirmed";
-    private final static String LoginError = "Login Failed: your username or password does not match the one you prevoiusly entered, please try again";
+    private final static String LoginError = "Login Failed: your username or password does not match the one you previously entered, please try again";
     private final static String nullUserError = "Error: User object does not exist";
-    private final static String captureSucessEntry = "Database Entry Confirmation: User was created and stored in local database";
+    private final static String captureSuccessEntry = "Database Entry Confirmation: User was created and stored in local database";
 
     /*Getters to retrieve messages*/
     public static String getUsernameErrorMessage() {
@@ -113,6 +113,6 @@ public class MessageLog {
     }
 
     public static String getCaptureSuccessEntry() {
-        return captureSucessEntry;
+        return captureSuccessEntry;
     }
 }

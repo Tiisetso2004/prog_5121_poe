@@ -94,7 +94,7 @@ public class LoginManager {
     public static String returnLoginStatus(boolean isLoggedIn, User user) {
         String message;
         if (!isLoggedIn) {
-            message = MessageLog.getLoginError(); //set or retrieve customized error messaging.
+            message = MessageLog.getLoginError(); //set or retrieve error messaging.
         } else {//successful login 
             message = MessageLog.getLoginSuccessMessage(user);
         }
@@ -107,7 +107,7 @@ public class LoginManager {
         if (user !=null) {
             message = MessageLog.getCaptureSuccessEntry();
         } else {
-            message = MessageLog.getNullUserError(); //set or retrieve customized error messaging.
+            message = MessageLog.getNullUserError();
         }
         System.out.println(message);
         return message;

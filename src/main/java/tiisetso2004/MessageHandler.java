@@ -19,7 +19,7 @@ public class MessageHandler {
         return ID.length() == 10 && Validator.nullCheck(ID);
     }
 
-    public static boolean messageOperationHandler(MessageData obj, List <MessageData> list) {
+    public static boolean messageOperationHandler(Message obj, List <Message> list) {
         boolean isNullField = Validator.nullCheck(obj.getMessage()) && Validator.nullCheck(obj.getMessageHash()) && Validator.nullCheck(obj.getMessageID()) && Validator.nullCheck(obj.getRecipient());
         if(list.isEmpty()||isNullField) {
             System.err.println("Error: attempted operation on empty list, or message object contains null fields");
