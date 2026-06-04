@@ -1,6 +1,6 @@
 package tiisetso2004;
 
-public class MessageData {
+public class Message {
 
     //ensure message contents or metadata cannot be changed by declaring fields as final.
     private final String message;
@@ -8,7 +8,7 @@ public class MessageData {
     private final String recipient;
     private final String messageID;
 
-    public MessageData(String message, String messageHash, String recipient,String messageID) {
+    public Message(String message, String messageHash, String recipient, String messageID) {
         this.message = message;
         this.messageHash = messageHash; //auto generated
         this.messageID = messageID; //auto generated
