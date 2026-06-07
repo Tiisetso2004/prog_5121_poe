@@ -30,5 +30,14 @@ public class Message {
 
     public String getRecipient() {
         return recipient;
-    }   
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%n<---------- Retrieved Message ----------> %n%nHash: %s%nRecipient: %s%nMessageID: %s%nMessage: %n%s%n",
+                getMessageHash(),
+                getRecipient(),
+                getMessageID(),
+                getMessage());
+    }
 }
