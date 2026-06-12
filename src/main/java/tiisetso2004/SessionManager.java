@@ -25,7 +25,7 @@ public class SessionManager {
 
             //as program grows add new cases with function calls.
             switch (choice) {
-                case 0:
+                case "0":
                     System.out.println("You chose QUIT, confirm y/n?");
                     String confirm = capture.nextLine();
                     if(confirm.equalsIgnoreCase("y")) {
