@@ -47,7 +47,7 @@ public class QuickChat {
             while (true) {
                 try {
                     System.out.println("What would you like to do with this message?");
-                    System.out.println("1.Send message\n2.Configure stored messages\n3.Delete message\nType 'quit' to exit");
+                    System.out.println("1.Send message\n2.Store message\n3.Delete message\n4.Configure Stored Messages\nType 'quit' to exit");
                     String choice = qcScan.nextLine();
 
                     //user exit condition
