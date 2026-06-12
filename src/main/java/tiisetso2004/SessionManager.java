@@ -48,8 +48,6 @@ public class SessionManager {
             }
         } catch (NullPointerException e) {
             System.err.println("No input was entered");
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid input. Please enter a number."); //catching non-numeric input to prevent loop from crashing
         }
     }
 }
