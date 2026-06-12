@@ -57,13 +57,25 @@ public class StorageManager {
         }
     }
 
-    public static String printMessages(List <Message> list) {
-        StringBuilder messages = new StringBuilder();
-        for (Message message : list) {
-            messages.append(message.getMessage()).append("\n");
+    public static void printMessages(List <Message> list) {
+        if(!list.isEmpty()) {
+            for (Message message : list) {
+                if (MessageHandler.messageObjectFieldValidator(message)) {
+                    System.out.println(message.toString());
+                }
+            }
+            System.out.printf("%nTotal Messages:%s ", getMessageCount(list));
+        }  else {
+            System.err.println("Error: list was empty could not print messages");
         }
-        return messages.toString().trim(); //trim the trailing whitespace
     }
+
+    public static void deleteMessage(String hash, List <Message> queue) {
+        if(!queue.isEmpty()) {
+            ListIterator <Message> iterator = queue.listIterator();
+
+            while (iterator.hasNext()) {
+                Message obj = iterator.next();
 
     public static boolean deleteMessage(Message obj, List <Message> list) {
         if(MessageHandler.messageOperationHandler(obj, list)) {
