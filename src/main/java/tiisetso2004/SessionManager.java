@@ -39,7 +39,6 @@ public class SessionManager {
                     break;
                 case 1:
                     createUser();
-                    isRunning = false;
                     QuickChat chat = new QuickChat();
                     chat.draftMessage();
                     break;
