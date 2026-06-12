@@ -6,11 +6,13 @@ public class Message {
     private final String message;
     private final String messageHash;
     private final String recipient;
+    private final String sender;
     private final String messageID;
 
     public Message(String message, String messageHash, String sender, String recipient, String messageID) {
         this.message = message;
         this.messageHash = messageHash; //auto generated
+        this.sender = sender;
         this.messageID = messageID; //auto generated
         this.recipient = recipient;
     }
@@ -18,6 +20,10 @@ public class Message {
     //getters only to retrieve values for message metadata
     public String getMessage() {
         return message;
+    }
+
+    public int getMessageLength() {
+        return getMessage().length();
     }
 
     public String getMessageHash() {
@@ -32,13 +38,16 @@ public class Message {
         return recipient;
     }
 
+    public String getSender() {
+        return sender;
+    }
+
     @Override
     public String toString() {
         return String.format("%n<---------- Retrieved Message ----------> %n%nSender: %s%nRecipient: %s%nHash: %s%nMessageID: %s%nMessage: %n%s%n",
                 getSender(),
                 getRecipient(),
                 getMessageHash(),
-                getRecipient(),
                 getMessageID(),
                 getMessage());
     }
