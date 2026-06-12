@@ -11,7 +11,7 @@ public class SessionManager {
     }
     
     /*Terminal UI to run program as sessions*/
-    public void LoginSession() {
+    public void startSession() {
         boolean isRunning = true;
         while(isRunning) { 
         System.out.println();
