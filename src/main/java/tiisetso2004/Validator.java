@@ -33,9 +33,9 @@ public class Validator {
     public static boolean notNullCheck(String input) {
         if (input == null || input.isBlank() || input.equalsIgnoreCase("null")) {
             System.err.println("Error: input cannot be empty, blank or contain string literal 'null', please fill in this field");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /*helper function to receive regex patterns and return true or false.*/
