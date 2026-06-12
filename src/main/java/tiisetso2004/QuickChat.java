@@ -52,7 +52,6 @@ public class QuickChat {
 
                     //user exit condition
                     if (choice.equalsIgnoreCase("quit")) {
-                        continueLoop = false;
                         break;
                     }
 
