@@ -57,7 +57,9 @@ public class QuickChat {
 
                     switch (choice) {
                         case "1":
-                            sendMessage(messObj);
+                            //stores then sends messages
+                            MessageHandler.sendMessage(messObj);
+                            StorageManager.loadAllJFromJson();
                             break;
 
                         case "2":
