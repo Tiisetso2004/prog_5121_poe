@@ -85,10 +85,19 @@ public class QuickChat {
         }
     }
 
-    private boolean sendMessage(Message messObj) {
-        return StorageManager.storeMessage(messObj, StorageManager.getSavedMessagesList()) &&
-               StorageManager.storeMessage(messObj, StorageManager.getSentMessagesList());
-    }
+    private void storedMessagesOption() {
+        try {
+            while (true) {
+                System.out.print("""
+                
+                Choose your option or type 0 to quit:
+        
+                1. Search for message
+                2. Delete message
+                3. Print Message report
+                4. Search for longest stored message
+        
+                Choice:\s""");
 
     //delete temporarily stored message in Array list
     private boolean discardMessage(Message messageObj) {
