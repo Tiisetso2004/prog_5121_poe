@@ -6,9 +6,10 @@ public class StorageManager {
 
     //adding all users created during instance of program to one static list.
     private static List <User> userLib = new ArrayList<>();
-    private static List <Message> allMessagesList =  new ArrayList<>();
-    private static List <Message> sentMessagesList = new ArrayList<>();
-    private static List <Message> discardedMessagesList = new ArrayList<>();
+    private static List <Message> temporaryMessages = new ArrayList<>();
+    private static List <Message> allMessages =  new ArrayList<>();
+    private static List <Message> sentMessages = new ArrayList<>();
+    private static List <Message> deletedMessages = new ArrayList<>();
 
     //check if user objects are null
     public static boolean addUser(User user) {
