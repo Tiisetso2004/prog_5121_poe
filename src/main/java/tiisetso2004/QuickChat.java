@@ -5,9 +5,7 @@ import java.util.*;
 public class QuickChat {
 
     Scanner qcScan = new Scanner(System.in);
-    int counter  = 0;
-    boolean isValidCount = false;
-   
+
     public void draftMessage() {
         try {
             while (!isValidCount) {
