@@ -34,7 +34,9 @@ public class Message {
 
     @Override
     public String toString() {
-        return String.format("%n<---------- Retrieved Message ----------> %n%nHash: %s%nRecipient: %s%nMessageID: %s%nMessage: %n%s%n",
+        return String.format("%n<---------- Retrieved Message ----------> %n%nSender: %s%nRecipient: %s%nHash: %s%nMessageID: %s%nMessage: %n%s%n",
+                getSender(),
+                getRecipient(),
                 getMessageHash(),
                 getRecipient(),
                 getMessageID(),
