@@ -99,10 +99,12 @@ public class QuickChat {
         
                 Choice:\s""");
 
-    //delete temporarily stored message in Array list
-    private boolean discardMessage(Message messageObj) {
-        return StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
-    }
+                String choice = qcScan.nextLine().trim();
+
+                if (choice.equals("0")) {
+                    System.out.println("Exiting system. Goodbye!");
+                    break; // This breaks the while(true) loop directly and exits cleanly
+                }
 
                 switch (choice) {
                     case "1":
