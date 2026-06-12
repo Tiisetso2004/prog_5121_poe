@@ -115,14 +115,15 @@ public class StorageManager {
             while (iterator.hasNext()) {
                 Message obj = iterator.next();
 
-    public static boolean deleteMessage(Message obj, List <Message> list) {
-        if(MessageHandler.messageOperationHandler(obj, list)) {
-            list.remove(obj);
-            System.out.println("MetadataGenerator successfully deleted");
-            return true;
+                if(MessageHandler.messageObjectFieldValidator(obj) && hash.equals(obj.getMessageHash())) {
+                    iterator.remove();
+                    getDeletedMessages().add(obj);
+                    storeInJson(getDeletedMessages(),getDeletedMessagesJson());
+                    System.out.println("Message successfully deleted");
+                }
+            }
         }
-        System.err.println("Failed to delete, message");
-        return false;
+        System.err.println("Failed to delete, message: Operation on empty list was attempted");
     }
 
     public static boolean storeMessage(Message obj, List <Message> list) {
