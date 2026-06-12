@@ -35,6 +35,9 @@ public class MessageLog {
     private final static String nullUserError = "Error: User object does not exist";
     private final static String captureSuccessEntry = "Database Entry Confirmation: User was created and stored in local database";
 
+    private MessageLog() {
+    }
+
     /*Getters to retrieve messages*/
     public static String getUsernameErrorMessage() {
         return usernameErrorMessage;
