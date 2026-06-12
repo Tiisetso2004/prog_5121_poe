@@ -35,8 +35,8 @@ public class QuickChat {
             String sender = LoginManager.promptUntilValid(qcScan,"Enter your cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
             String contact = LoginManager.promptUntilValid(qcScan,"Enter the recipient's cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
 
-            System.out.println("======MetadataGenerator no : "+messageNum+" ======");
-            String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ", MessageHandler::messageValidator, "MetadataGenerator is too long or is empty","MetadataGenerator ready to send");
+            System.out.println("====== Message no : "+messageNum+" ======");
+            String text = LoginManager.promptUntilValid(qcScan,"Enter your message: ", MessageHandler::messageValidator, "Message is too long or is empty","Message ready to send");
                 
             String message = text.trim();
             String ID = MetadataGenerator.GenerateMessageID(10);
