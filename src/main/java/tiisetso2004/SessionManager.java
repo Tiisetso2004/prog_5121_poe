@@ -36,7 +36,7 @@ public class SessionManager {
                         System.out.println("You chose to continue");
                     }
                     break;
-                case 1:
+                case "1":
                     createUser();
                     QuickChat chat = new QuickChat();
                     chat.draftMessage();
