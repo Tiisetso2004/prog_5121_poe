@@ -72,7 +72,7 @@ public class LoginManager {
         User user = new User(fullName, username, cellphoneNumber, password); //declare a new user object.
         StorageManager.addUser(user); //add the user to database
         loginUser(user,sc);
-        returnLoginStatus(user);
+        System.out.println(returnLoginStatus(user));
      }
 
     /*Function to validate actual login*/
