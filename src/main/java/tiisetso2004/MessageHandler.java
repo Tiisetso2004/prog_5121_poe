@@ -3,6 +3,9 @@ package tiisetso2004;
 import java.util.List;
 
 public class MessageHandler {
+    
+    private MessageHandler() {
+    }
 
     public static boolean messageValidator(String m) {
         boolean validMessage = Validator.nullCheck(m) && m.length()<=250;
