@@ -11,6 +11,12 @@ public class StorageManager {
     private static List <Message> sentMessages = new ArrayList<>();
     private static List <Message> deletedMessages = new ArrayList<>();
 
+    private static File storedMessagesJson = new File("stored_messages.json");
+    private static File deletedMessagesJson = new File("deleted_messages.json");
+    private static File sentMessagesJson = new File("sent_messages.json");
+
+    private StorageManager () {
+    }
     //check if user objects are null
     public static boolean addUser(User user) {
         if (user != null) {
