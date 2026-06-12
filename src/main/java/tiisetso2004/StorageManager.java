@@ -32,7 +32,7 @@ public class StorageManager {
         if (user != null) {
             userLib.add(user);
         } else {
-            return false;
+            System.err.println("Invalid user");
         }
     }
 
