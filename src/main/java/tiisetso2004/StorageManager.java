@@ -88,7 +88,7 @@ public class StorageManager {
 
     //reusing same logic store messages temporarily
     public static void captureMessageDraft(Message obj, List <Message> list) {
-        if (obj != null) {
+        if (MessageHandler.messageObjectFieldValidator(obj)) {
             list.add(obj);
         } else {
             System.err.println("Failed to capture message");
