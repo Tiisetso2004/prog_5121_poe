@@ -30,7 +30,7 @@ public class Validator {
     }
 
     //checks if any string input is null, blank or contains literal string "null".
-    public static boolean nullCheck(String input) {
+    public static boolean notNullCheck(String input) {
         if (input == null || input.isBlank() || input.equalsIgnoreCase("null")) {
             System.err.println("Error: input cannot be empty, blank or contain string literal 'null', please fill in this field");
             return true;
