@@ -104,7 +104,6 @@ public class LoginManager {
         } else {
             message = MessageLog.getNullUserError();
         }
-        System.out.println(message);
         return message;
     }
 }
