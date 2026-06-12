@@ -63,7 +63,8 @@ public class QuickChat {
                             break;
 
                         case "2":
-                            storeMessage(messObj);
+                            StorageManager.storeMessage(messObj, StorageManager.getAllMessages());
+                            StorageManager.loadAllJFromJson();
                             break;
 
                         case "3":
