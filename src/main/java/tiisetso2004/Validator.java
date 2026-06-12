@@ -68,7 +68,7 @@ public class Validator {
 
     /*Validation logic for passay library.*/
     public static boolean checkPasswordComplexity(String password) {
-        if (nullCheck(password)) {
+        if (!notNullCheck(password)) {
             return false;
         }
         RuleResult result = VALIDATOR.validate(new PasswordData(password));
