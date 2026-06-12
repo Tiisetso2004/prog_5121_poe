@@ -104,8 +104,42 @@ public class QuickChat {
         return StorageManager.deleteMessage(messageObj, StorageManager.getSavedMessagesList());
     }
 
-    //persistent storage in JSON file
-    private boolean storeMessage(Message messageObj) {
-       return StorageManager.storeMessage(messageObj,StorageManager.getSavedMessagesList());
+                switch (choice) {
+                    case "1":
+                        System.out.print("\nEnter the message hash, sender, ID, cellphone number to search for: ");
+                        String searchKey = qcScan.nextLine();
+                        List<Message> messages = MessageHandler.searchForMatches(searchKey, StorageManager.getAllMessages());
+                        System.out.println(messages);
+                        break;
+
+                    case "2":
+                        System.out.print("\nEnter the required message hash to delete the message: ");
+                        String hash = qcScan.nextLine();
+                        StorageManager.deleteMessage(hash, StorageManager.getAllMessages());
+                        StorageManager.loadAllJFromJson();
+                        break;
+
+                    case "3":
+                        StorageManager.printMessages(StorageManager.getAllMessages());
+                        break;
+
+                    case "4":
+                        String results = String.format("%nLongest Stored Message: %s%nLongest Sent Message: %s%nLongest Deleted Message: %s%n",
+                                MessageHandler.findLongestMessage(StorageManager.getAllMessages()),
+                                MessageHandler.findLongestMessage(StorageManager.getSentMessages()),
+                                MessageHandler.findLongestMessage(StorageManager.getDeletedMessages()));
+                        System.out.println(results);
+                        break;
+
+                    default:
+                        System.err.println("Invalid option. Enter only from the choices provided above.");
+                        break; // Restarts the loop to ask for input again
+                }
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Missing input detected");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid input detected");
+        }
     }
 }
