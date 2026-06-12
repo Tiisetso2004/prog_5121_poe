@@ -21,8 +21,7 @@ public class SessionManager {
         System.out.println("Choose your option:");
         System.out.println("0.QUIT \n1.Create new user");
         try {
-            String scannerInput = capture.nextLine();
-            int choice = Integer.parseInt(scannerInput);
+            String choice = capture.nextLine();
 
             //as program grows add new cases with function calls.
             switch (choice) {
