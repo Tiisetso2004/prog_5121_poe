@@ -14,11 +14,6 @@ public class LoginManager {
             String input = sc.nextLine();
             System.out.println();//UX addition: terminal spacing.
 
-            if (input.equalsIgnoreCase("quit")) {
-                System.out.println("Quitting...\nGoodbye");
-                return "aborted operation";
-            }
-
             if (validator.test(input)) {
                 System.out.println(successMessage);
                 return input;
