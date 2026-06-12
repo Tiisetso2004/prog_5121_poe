@@ -46,4 +46,54 @@ public class MessageHandler {
         }
         return true;
     }
+    //Simulate message functions
+    public static boolean sendMessage(Message messObj) {
+        return StorageManager.storeMessage(messObj, StorageManager.getAllMessages()) &&
+               StorageManager.storeMessage(messObj, StorageManager.getSentMessages());
+    }
+
+    public static List<Message> searchForMatches(String searchKey, List <Message> list) {
+       List <Message> matchedMessages = new ArrayList<>();
+
+        if(Validator.notNullCheck(searchKey) && !list.isEmpty()) {
+            String key = searchKey.trim();
+
+            for(Message message: list) {
+                boolean validKey = key.equals(message.getMessageHash())||key.equals(message.getMessageID());
+
+                if (MessageHandler.messageRetrievalHandler(message, list) && validKey) {
+                    matchedMessages.add(message);
+                }
+            }
+        }
+        return matchedMessages;
+    }
+
+    public static Message findLongestMessage(List <Message> targetList) {
+       if(targetList == null || targetList.isEmpty()) {
+           System.err.println("Error: search operation failed list was empty");
+           return null;
+       }
+
+       Message longestMessage;
+
+       if (messageObjectFieldValidator(targetList.getFirst())) {
+           longestMessage = targetList.getFirst();
+       } else {
+           System.out.println("Error: search object is null");
+           return null;
+       }
+
+       for (Message current : targetList) {
+           if (messageObjectFieldValidator(current)) {
+               if(longestMessage == null) {
+                   longestMessage = current;
+               }
+               else if(current.getMessageLength() >= longestMessage.getMessageLength()) {
+                   longestMessage = current;
+               }
+           }
+       }
+        return longestMessage;
+    }
 }
