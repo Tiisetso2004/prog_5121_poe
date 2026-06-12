@@ -8,7 +8,7 @@ public class MessageHandler {
     }
 
     public static boolean messageValidator(String m) {
-        boolean validMessage = Validator.nullCheck(m) && m.length()<=250;
+        boolean validMessage = Validator.notNullCheck(m) && m.length()<=250;
         if(!validMessage) {
             System.out.println("Message is invalid:\nit exceeds 250 characters or is blank");
             return false;
