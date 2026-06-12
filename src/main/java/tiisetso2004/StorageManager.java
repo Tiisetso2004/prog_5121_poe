@@ -21,7 +21,6 @@ public class StorageManager {
     public static void addUser(User user) {
         if (user != null) {
             userLib.add(user);
-            return true;
         } else {
             return false;
         }
