@@ -18,7 +18,7 @@ public class StorageManager {
     private StorageManager () {
     }
     //check if user objects are null
-    public static boolean addUser(User user) {
+    public static void addUser(User user) {
         if (user != null) {
             userLib.add(user);
             return true;
