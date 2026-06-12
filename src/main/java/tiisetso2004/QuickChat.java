@@ -41,8 +41,8 @@ public class QuickChat {
             String message = text.trim();
             String ID = MetadataGenerator.GenerateMessageID(10);
             String messageHash = MetadataGenerator.createMessageHash(ID, messageNum, message);
-            Message messObj = new Message(message, messageHash, contact, ID);
-            StorageManager.captureMessageDraft(messObj, StorageManager.getSavedMessagesList());
+            Message messObj = new Message(message, messageHash, sender, contact, ID);
+            StorageManager.captureMessageDraft(messObj, StorageManager.getTemporaryMessages());
 
             boolean continueLoop = true;
             while (continueLoop) {
