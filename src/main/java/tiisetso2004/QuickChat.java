@@ -65,7 +65,13 @@ public class QuickChat {
                             break;
 
                         case "3":
-                            discardMessage(messObj);
+                            StorageManager.deleteMessage(messageHash, StorageManager.getAllMessages());
+                            StorageManager.loadAllJFromJson();
+                            break;
+
+                        case "4":
+                            StorageManager.loadAllJFromJson();
+                            storedMessagesOption();
                             break;
 
                         default:
