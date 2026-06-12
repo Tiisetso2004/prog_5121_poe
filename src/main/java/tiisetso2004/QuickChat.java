@@ -32,6 +32,7 @@ public class QuickChat {
 
         for (int i = 0; i < counter; i++) {
             int messageNum = i+1;
+            String sender = LoginManager.promptUntilValid(qcScan,"Enter your cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
             String contact = LoginManager.promptUntilValid(qcScan,"Enter the recipient's cellphone number: ", Validator::checkCellphoneNumber,MessageLog.getCellphoneErrorMessage(), MessageLog.getCellphoneMessage());
 
             System.out.println("======MetadataGenerator no : "+messageNum+" ======");
