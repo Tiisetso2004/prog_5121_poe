@@ -19,13 +19,29 @@ public class MessageHandler {
     }
     //checks if the ID exceeds the 10-character limit.
     public static boolean validateMessageID(String ID) {
-        return ID.length() == 10 && Validator.nullCheck(ID);
+        return Validator.notNullCheck(ID) && ID.length() ==10;
     }
-
-    public static boolean messageOperationHandler(Message obj, List <Message> list) {
-        boolean isNullField = Validator.nullCheck(obj.getMessage()) && Validator.nullCheck(obj.getMessageHash()) && Validator.nullCheck(obj.getMessageID()) && Validator.nullCheck(obj.getRecipient());
-        if(list.isEmpty()||isNullField) {
-            System.err.println("Error: attempted operation on empty list, or message object contains null fields");
+    //extra validation for message objects
+    public static boolean messageObjectFieldValidator(Message obj) {
+       if(obj ==null){
+           System.err.println("Error: message object is null");
+           return false;
+       }
+        boolean hasInvalidField =
+            !Validator.notNullCheck(obj.getMessage()) ||
+            !Validator.notNullCheck(obj.getMessageHash()) ||
+            !Validator.notNullCheck(obj.getMessageID()) ||
+            !Validator.notNullCheck(obj.getRecipient());
+        if(hasInvalidField) {
+            System.err.println("Error: message object is null or contains null fields");
+            return false;
+        }
+        return true;
+    }
+    //use for operations that require retrievals from memory
+    public static boolean messageRetrievalHandler(Message obj, List <Message> list) {
+        if(!messageObjectFieldValidator(obj) || list == null || list.isEmpty()) {
+            System.err.println("Error: attempted operation on empty list");
             return false;
         }
         return true;
