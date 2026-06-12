@@ -126,10 +126,11 @@ public class StorageManager {
         System.err.println("Failed to delete, message: Operation on empty list was attempted");
     }
 
-    public static boolean storeMessage(Message obj, List <Message> list) {
-        if(MessageHandler.messageOperationHandler(obj, list)) {
-            list.remove(obj);
-            System.out.println("MetadataGenerator successfully stored to list");
+    public static boolean storeMessage(Message obj, List <Message> sourceList) {
+        if(MessageHandler.messageObjectFieldValidator(obj)) {
+            sourceList.add(obj);
+            storeInJson(sourceList, getStoredMessagesJson());
+            System.out.println("Message successfully stored to list");
             return true;
         }
         System.err.println("Error storing message to list");
