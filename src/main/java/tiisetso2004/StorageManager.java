@@ -39,8 +39,20 @@ public class StorageManager {
         userLib.remove(user);
     }
 
-    public static List<Message> getSavedMessagesList() {
-        return allMessagesList;
+    public static List <Message> getAllMessages() {
+        return allMessages;
+    }
+
+    public static void setSentMessagesJson(List<Message> source) {
+        sentMessages = source;
+    }
+
+    public static void setAllMessages (List<Message> source) {
+        allMessages = source;
+    }
+
+    public static void setDeletedMessages (List<Message> source) {
+        deletedMessages = source;
     }
 
     public static List <Message> getSentMessages() {
