@@ -36,8 +36,16 @@ public class StorageManager {
         return allMessagesList;
     }
 
-    public static List<Message> getSentMessagesList() {
-        return sentMessagesList;
+    public static List <Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public static List <Message> getTemporaryMessages() {
+        return temporaryMessages;
+    }
+
+    public static List <Message> getDeletedMessages() {
+        return deletedMessages;
     }
 
     public static int getMessageCount(List <Message> list) {
