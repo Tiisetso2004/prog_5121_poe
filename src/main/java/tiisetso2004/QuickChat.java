@@ -44,8 +44,7 @@ public class QuickChat {
             Message messObj = new Message(message, messageHash, sender, contact, ID);
             StorageManager.captureMessageDraft(messObj, StorageManager.getTemporaryMessages());
 
-            boolean continueLoop = true;
-            while (continueLoop) {
+            while (true) {
                 try {
                     System.out.println("What would you like to do with this message?");
                     System.out.println("1.Send message\n2.Configure stored messages\n3.Delete message\nType 'quit' to exit");
