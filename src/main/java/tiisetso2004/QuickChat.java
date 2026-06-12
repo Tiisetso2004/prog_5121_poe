@@ -7,6 +7,9 @@ public class QuickChat {
     Scanner qcScan = new Scanner(System.in);
 
     public void draftMessage() {
+        boolean isValidCount = false;
+        int counter  = 0;
+
         try {
             while (!isValidCount) {
                 System.out.print("\nEnter the amount of messages you wish to send or type 0 to quit: ");
