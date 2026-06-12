@@ -8,7 +8,7 @@ public class Message {
     private final String recipient;
     private final String messageID;
 
-    public Message(String message, String messageHash, String recipient, String messageID) {
+    public Message(String message, String messageHash, String sender, String recipient, String messageID) {
         this.message = message;
         this.messageHash = messageHash; //auto generated
         this.messageID = messageID; //auto generated
