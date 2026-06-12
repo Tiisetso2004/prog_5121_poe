@@ -44,7 +44,19 @@ public class StorageManager {
         return list.size();
     }
 
-    public static List <Message> getMessages(List <Message> list) {
+    public static File getStoredMessagesJson() {
+        return storedMessagesJson;
+    }
+
+    public static File getSentMessagesJson() {
+        return sentMessagesJson;
+    }
+
+    public static File getDeletedMessagesJson() {
+        return deletedMessagesJson;
+    }
+
+    public static List <Message> getUnmodifiedMessages(List <Message> list) {
         return Collections.unmodifiableList(list);
     }
 
