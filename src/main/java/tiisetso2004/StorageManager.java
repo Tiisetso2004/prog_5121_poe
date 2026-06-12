@@ -136,4 +136,43 @@ public class StorageManager {
         System.err.println("Error storing message to list");
         return false;
     }
+
+    public static void storeInJson(List<Message> messages, File filename) {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        String jsonString = gson.toJson(messages);
+        System.out.println(jsonString);
+
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write(jsonString);
+            System.out.println("Messages successfully written to json");
+        } catch (IOException e) {
+            System.err.println("Failed to save messages to JSON file");
+        } catch (NullPointerException e) {
+            System.err.println("Null field detected");
+        }
+    }
+
+    public static List <Message> loadMessagesFromJson(File filename) {
+        Gson gson = new GsonBuilder().create();
+
+        List <Message> loadedMessages = new ArrayList<>();
+        try (FileReader reader = new FileReader(filename)) {
+            Type generic = new TypeToken <ArrayList<Message>>(){}.getType();
+            loadedMessages = gson.fromJson(reader, generic);
+        } catch (IOException e) {
+            System.err.println("Failed to read file");
+        } catch (NullPointerException e) {
+            System.err.println("Null field detected");
+        }
+        return loadedMessages;
+    }
+
+    public static void loadAllJFromJson() {
+        setAllMessages(loadMessagesFromJson(getStoredMessagesJson()));
+        setSentMessagesJson(loadMessagesFromJson(getSentMessagesJson()));
+        setDeletedMessages(loadMessagesFromJson(getDeletedMessagesJson()));
+    }
 }
