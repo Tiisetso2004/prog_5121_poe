@@ -1,8 +1,6 @@
 package tiisetso2004;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -14,20 +12,23 @@ import java.lang.reflect.Type;
 
 public class StorageManager {
 
-    //adding all users created during instance of program to one static list.
-    private static List <User> userLib = new ArrayList<>();
-    private static List <Message> temporaryMessages = new ArrayList<>();
-    private static List <Message> allMessages =  new ArrayList<>();
-    private static List <Message> sentMessages = new ArrayList<>();
-    private static List <Message> deletedMessages = new ArrayList<>();
+    // Lists tracking application state in RAM
+    private static List<User> userLib = new ArrayList<>();
+    private static List<Message> temporaryMessages = new ArrayList<>();
+    private static List<Message> allMessages =  new ArrayList<>();
+    private static List<Message> sentMessages = new ArrayList<>();
+    private static List<Message> deletedMessages = new ArrayList<>();
 
-    private static File storedMessagesJson = new File("stored_messages.json");
-    private static File deletedMessagesJson = new File("deleted_messages.json");
-    private static File sentMessagesJson = new File("sent_messages.json");
+    // File pointers on disk
+    private static final File storedMessagesJson = new File("stored_messages.json");
+    private static final File deletedMessagesJson = new File("deleted_messages.json");
+    private static final File sentMessagesJson = new File("sent_messages.json");
 
     private StorageManager () {
+        // Private constructor prevents instantiation of this utility class
     }
-    //check if user objects are null
+
+    // --- User Related Operations ---
     public static void addUser(User user) {
         if (user != null) {
             userLib.add(user);
@@ -40,7 +41,7 @@ public class StorageManager {
         return userLib.size();
     }
 
-    public static List <User> getUsers() {  
+    public static List<User> getUsers() {
         return Collections.unmodifiableList(userLib);
     }
 
@@ -48,141 +49,156 @@ public class StorageManager {
         userLib.remove(user);
     }
 
-    public static List <Message> getAllMessages() {
-        return allMessages;
+    // --- List Getters & Setters ---
+    public static List<Message> getAllMessages() { return allMessages; }
+    public static List<Message> getSentMessages() { return sentMessages; }
+    public static List<Message> getTemporaryMessages() { return temporaryMessages; }
+    public static List<Message> getDeletedMessages() { return deletedMessages; }
+
+    public static void setSentMessages(List<Message> source) {
+        sentMessages = (source != null) ? source : new ArrayList<>();
     }
 
-    public static void setSentMessagesJson(List<Message> source) {
-        sentMessages = source;
+    public static void setAllMessages(List<Message> source) {
+        allMessages = (source != null) ? source : new ArrayList<>();
+    }
+    public static void setDeletedMessages(List<Message> source) {
+        deletedMessages = (source != null) ? source : new ArrayList<>();
     }
 
-    public static void setAllMessages (List<Message> source) {
-        allMessages = source;
-    }
-
-    public static void setDeletedMessages (List<Message> source) {
-        deletedMessages = source;
-    }
-
-    public static List <Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public static List <Message> getTemporaryMessages() {
-        return temporaryMessages;
-    }
-
-    public static List <Message> getDeletedMessages() {
-        return deletedMessages;
-    }
-
-    public static int getMessageCount(List <Message> list) {
-        return list.size();
-    }
-
+    // --- File Getters ---
     public static File getStoredMessagesJson() {
         return storedMessagesJson;
     }
-
     public static File getSentMessagesJson() {
         return sentMessagesJson;
     }
-
     public static File getDeletedMessagesJson() {
         return deletedMessagesJson;
     }
 
-    public static List <Message> getUnmodifiedMessages(List <Message> list) {
-        return Collections.unmodifiableList(list);
+    // --- Utility Operations ---
+    public static int getMessageCount(List<Message> list) {
+        return (list != null) ? list.size() : 0;
     }
 
-    //reusing same logic store messages temporarily
-    public static void captureMessageDraft(Message obj, List <Message> list) {
-        if (MessageHandler.messageObjectFieldValidator(obj)) {
+    public static List<Message> getUnmodifiedMessages(List<Message> list) {
+        return Collections.unmodifiableList(list != null ? list : new ArrayList<>());
+    }
+
+    public static void captureMessageDraft(Message obj, List<Message> list) {
+        if (list != null && MessageHandler.messageObjectFieldValidator(obj)) {
             list.add(obj);
         } else {
-            System.err.println("Failed to capture message");
+            System.err.println("Failed to capture message draft");
         }
     }
 
-    public static void printMessages(List <Message> list) {
-        if(!list.isEmpty()) {
+    public static void printMessages(List<Message> list) {
+        if (list != null && !list.isEmpty()) {
             for (Message message : list) {
                 if (MessageHandler.messageObjectFieldValidator(message)) {
                     System.out.println(message.toString());
                 }
             }
-            System.out.printf("%nTotal Messages:%s ", getMessageCount(list));
-        }  else {
-            System.err.println("Error: list was empty could not print messages");
+            System.out.printf("%nTotal Messages: %d%n", getMessageCount(list));
+        } else {
+            System.err.println("Error: List was empty or null, could not print messages");
         }
     }
 
-    public static void deleteMessage(String hash, List <Message> queue) {
-        if(!queue.isEmpty()) {
-            ListIterator <Message> iterator = queue.listIterator();
+    // --- Core Persistence Engines ---
 
-            while (iterator.hasNext()) {
-                Message obj = iterator.next();
+    /**
+     * Deletes a message from a given queue and moves it to the deleted messages archive.
+     * Updates BOTH affected JSON files on disk.
+     */
+    public static void deleteMessage(String hash, List<Message> queue, File sourceFile) {
+        if (queue == null || queue.isEmpty() || hash == null) {
+            System.err.println("Failed to delete: Queue is empty/null or invalid hash.");
+            return;
+        }
 
-                if(MessageHandler.messageObjectFieldValidator(obj) && hash.equals(obj.getMessageHash())) {
-                    iterator.remove();
-                    getDeletedMessages().add(obj);
-                    storeInJson(getDeletedMessages(),getDeletedMessagesJson());
-                    System.out.println("Message successfully deleted");
-                }
+        boolean itemRemoved = false;
+        ListIterator<Message> iterator = queue.listIterator();
+
+        while (iterator.hasNext()) {
+            Message obj = iterator.next();
+
+            if (MessageHandler.messageObjectFieldValidator(obj) && hash.equals(obj.getMessageHash())) {
+                iterator.remove();
+                getDeletedMessages().add(obj);
+                itemRemoved = true;
+                System.out.println("Message successfully removed from active queue.");
             }
         }
-        System.err.println("Failed to delete, message: Operation on empty list was attempted");
+
+        if (itemRemoved) {
+            // Save BOTH the updated source list AND the updated deleted archive list
+            storeInJson(queue, sourceFile);
+            storeInJson(getDeletedMessages(), getDeletedMessagesJson());
+            System.out.println("Disk architecture successfully updated post-deletion.");
+        } else {
+            System.err.println("Deletion failed: Message hash not found in the list.");
+        }
     }
 
-    public static boolean storeMessage(Message obj, List <Message> sourceList) {
-        if(MessageHandler.messageObjectFieldValidator(obj)) {
+    /**
+     * Stores a message dynamically to a targeted memory list and its respective disk file.
+     */
+    public static boolean storeMessage(Message obj, List<Message> sourceList, File targetFile) {
+        if (sourceList == null || targetFile == null) {
+            System.err.println("Error: Target storage components cannot be null.");
+            return false;
+        }
+
+        if (MessageHandler.messageObjectFieldValidator(obj)) {
             sourceList.add(obj);
-            storeInJson(sourceList, getStoredMessagesJson());
-            System.out.println("Message successfully stored to list");
+            storeInJson(sourceList, targetFile);
+            System.out.println("Message successfully stored to list and disk.");
             return true;
         }
-        System.err.println("Error storing message to list");
+        System.err.println("Error storing message: Field validation failed.");
         return false;
     }
 
     public static void storeInJson(List<Message> messages, File filename) {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        if (filename == null || messages == null) return;
 
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(messages);
-        System.out.println(jsonString);
 
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write(jsonString);
-            System.out.println("Messages successfully written to json");
         } catch (IOException e) {
-            System.err.println("Failed to save messages to JSON file");
-        } catch (NullPointerException e) {
-            System.err.println("Null field detected");
+            System.err.println("Failed to save messages to JSON file: " + filename.getName());
         }
     }
 
-    public static List <Message> loadMessagesFromJson(File filename) {
-        Gson gson = new GsonBuilder().create();
+    public static List<Message> loadMessagesFromJson(File filename) {
+        List<Message> loadedMessages = new ArrayList<>();
 
-        List <Message> loadedMessages = new ArrayList<>();
-        try (FileReader reader = new FileReader(filename)) {
-            Type generic = new TypeToken <ArrayList<Message>>(){}.getType();
-            loadedMessages = gson.fromJson(reader, generic);
-        } catch (IOException e) {
-            System.err.println("Failed to read file");
-        } catch (NullPointerException e) {
-            System.err.println("Null field detected");
+        if (filename != null && filename.exists()) {
+            Gson gson = new GsonBuilder().create();
+            try (FileReader reader = new FileReader(filename)) {
+                Type generic = new TypeToken<ArrayList<Message>>() {}.getType();
+                List<Message> parsed = gson.fromJson(reader, generic);
+                if (parsed != null) {
+                    loadedMessages = parsed;
+                }
+            } catch (IOException e) {
+                System.err.println("Failed to read file: " + filename.getName());
+            }
         }
         return loadedMessages;
     }
 
+    /**
+     * Boots up the system state cleanly across sessions
+     */
     public static void loadAllJFromJson() {
         setAllMessages(loadMessagesFromJson(getStoredMessagesJson()));
-        setSentMessagesJson(loadMessagesFromJson(getSentMessagesJson()));
+        setSentMessages(loadMessagesFromJson(getSentMessagesJson()));
         setDeletedMessages(loadMessagesFromJson(getDeletedMessagesJson()));
     }
 }
