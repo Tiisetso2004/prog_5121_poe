@@ -44,46 +44,39 @@ public class QuickChat {
             Message messObj = new Message(message, messageHash, sender, contact, ID);
             StorageManager.captureMessageDraft(messObj, StorageManager.getTemporaryMessages());
 
-            while (true) {
-                try {
-                    System.out.println("What would you like to do with this message?");
-                    System.out.println("1.Send message\n2.Store message\n3.Delete message\n4.Configure Stored Messages\nType 'quit' to exit");
-                    String choice = qcScan.nextLine();
+            try {
+                System.out.println("What would you like to do with this message?");
+                System.out.println("1.Send message\n2.Store message\n3.Delete message\n4.Configure Stored Messages");
+                String choice = qcScan.nextLine();
 
-                    //user exit condition
-                    if (choice.equalsIgnoreCase("quit")) {
+                StorageManager.loadAllJFromJson();
+
+                switch (choice) {
+                    case "1":
+                        //stores then sends messages
+                        MessageHandler.sendMessage(messObj);
                         break;
-                    }
 
-                    switch (choice) {
-                        case "1":
-                            //stores then sends messages
-                            MessageHandler.sendMessage(messObj);
-                            StorageManager.loadAllJFromJson();
-                            break;
+                    case "2":
+                        StorageManager.storeMessage(messObj, StorageManager.getAllMessages(),StorageManager.getStoredMessagesJson());
+                        break;
 
-                        case "2":
-                            StorageManager.storeMessage(messObj, StorageManager.getAllMessages());
-                            StorageManager.loadAllJFromJson();
-                            break;
+                    case "3":
+                        //removes it temporary messages
+                        StorageManager.getTemporaryMessages().remove(messObj);
+                        System.out.println("Deleted Message from list");
+                        break;
 
-                        case "3":
-                            StorageManager.deleteMessage(messageHash, StorageManager.getAllMessages());
-                            StorageManager.loadAllJFromJson();
-                            break;
-
-                        case "4":
-                            StorageManager.loadAllJFromJson();
-                            storedMessagesOption();
-                            break;
+                    case "4":
+                        storedMessagesOption();
+                        break;
 
                         default:
-                            System.out.println("Enter a choice of 1 or 3");
-                            break;
-                    }
-                } catch (NullPointerException npe) {
-                    System.err.println("Input is empty");
+                        System.out.println("Enter a choice of 1 or 3");
+                        break;
                 }
+            } catch (NullPointerException npe) {
+                System.err.println("Input is empty");
             }
         }
     }
@@ -120,8 +113,7 @@ public class QuickChat {
                     case "2":
                         System.out.print("\nEnter the required message hash to delete the message: ");
                         String hash = qcScan.nextLine();
-                        StorageManager.deleteMessage(hash, StorageManager.getAllMessages());
-                        StorageManager.loadAllJFromJson();
+                        StorageManager.deleteMessage(hash, StorageManager.getAllMessages(), StorageManager.getStoredMessagesJson());
                         break;
 
                     case "3":
