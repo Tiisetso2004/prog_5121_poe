@@ -1,12 +1,5 @@
 [
   {
-    "message": "testing is hard",
-    "messageHash": "25:3:testinghard",
-    "recipient": "+27551824670",
-    "sender": "+27123456789",
-    "messageID": "2541587206"
-  },
-  {
     "message": "another test message",
     "messageHash": "62:2:anothermessage",
     "recipient": "+27152458796",
@@ -19,6 +12,13 @@
     "recipient": "+27145623897",
     "sender": "+27123456789",
     "messageID": "8701740508"
+  },
+  {
+    "message": "this is going in the deleted messaged que",
+    "messageHash": "23:1:thisque",
+    "recipient": "+27159753254",
+    "sender": "+27159753258",
+    "messageID": "2348553296"
   },
   {
     "message": "let us embark on an adventure",
