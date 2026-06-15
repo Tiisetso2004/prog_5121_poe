@@ -48,9 +48,9 @@ public class MessageHandler {
         return true;
     }
     //Simulate message functions
-    public static boolean sendMessage(Message messObj) {
-        return StorageManager.storeMessage(messObj, StorageManager.getAllMessages(),StorageManager.getStoredMessagesJson()) &&
-               StorageManager.storeMessage(messObj, StorageManager.getSentMessages(), StorageManager.getSentMessagesJson());
+    public static void sendMessage(Message messObj) {
+        StorageManager.storeMessage(messObj, StorageManager.getAllMessages(), StorageManager.getStoredMessagesJson());
+        StorageManager.storeMessage(messObj, StorageManager.getSentMessages(), StorageManager.getSentMessagesJson());
     }
 
     public static List<Message> searchForMatches(String searchKey, List <Message> list) {
