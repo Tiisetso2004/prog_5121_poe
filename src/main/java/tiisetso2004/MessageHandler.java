@@ -60,7 +60,7 @@ public class MessageHandler {
             String key = searchKey.trim();
 
             for(Message message: list) {
-                boolean validKey = key.equals(message.getMessageHash())||key.equals(message.getMessageID());
+                boolean validKey = key.equals(message.getMessageHash())||key.equals(message.getMessageID()) || key.equals(message.getSender()) || key.equals(message.getRecipient());
 
                 if (MessageHandler.messageRetrievalHandler(message, list) && validKey) {
                     matchedMessages.add(message);
