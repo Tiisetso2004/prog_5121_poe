@@ -1,0 +1,30 @@
+[
+  {
+    "message": "another test message",
+    "messageHash": "62:2:anothermessage",
+    "recipient": "+27152458796",
+    "sender": "+27456159782",
+    "messageID": "6289493080"
+  },
+  {
+    "message": "Hopefully this works as intended",
+    "messageHash": "87:3:Hopefullyintended",
+    "recipient": "+27145623897",
+    "sender": "+27123456789",
+    "messageID": "8701740508"
+  },
+  {
+    "message": "this is going in the deleted messaged que",
+    "messageHash": "23:1:thisque",
+    "recipient": "+27159753254",
+    "sender": "+27159753258",
+    "messageID": "2348553296"
+  },
+  {
+    "message": "let us embark on an adventure",
+    "messageHash": "73:2:letadventure",
+    "recipient": "+27123456789",
+    "sender": "+27123456789",
+    "messageID": "7370580779"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "message": "This is a test message",
+    "messageHash": "32:1:Thismessage",
+    "recipient": "+27159753258",
+    "sender": "+27159753258",
+    "messageID": "3282146948"
+  },
+  {
+    "message": "this is going in the deleted messaged que",
+    "messageHash": "23:1:thisque",
+    "recipient": "+27159753254",
+    "sender": "+27159753258",
+    "messageID": "2348553296"
+  }
+]

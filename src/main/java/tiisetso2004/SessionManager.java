@@ -1,16 +1,15 @@
 package tiisetso2004;
 
-import java.util.Scanner;
- /**
- * UserManager is the UI manager for the application.
- * All designs for the user interface of the program will are made here. 
- **/
-public class UserManager {
+import java.util.*;
+
+public class SessionManager {
 
     Scanner capture  = new Scanner(System.in);
+
     /*Default no-args constructor*/
-    public UserManager() {
+    public SessionManager() {
     }
+    
     /*Terminal UI to run program as sessions*/
     public void startSession() {
         boolean isRunning = true;
@@ -22,43 +21,44 @@ public class UserManager {
         System.out.println("Choose your option:");
         System.out.println("0.QUIT \n1.Create new user");
         try {
-            int choice  = capture.nextInt();
+            String choice = capture.nextLine();
+
             //as program grows add new cases with function calls.
             switch (choice) {
-                case 0:
+                case "0":
                     System.out.println("You chose QUIT, confirm y/n?");
-                    capture.nextLine(); //clearing of buffer from next int.
                     String confirm = capture.nextLine();
-                    if(confirm.toLowerCase().equals("y")) {
+                    if(confirm.equalsIgnoreCase("y")) {
                         System.out.println("Quiting.....\nGoodbye");
+                        isRunning = false;
                         System.exit(0);
-                    } else if (confirm.toLowerCase().equals("n")) {
+                    } else if (confirm.equalsIgnoreCase("n")) {
                         System.out.println("You chose to continue");
                     }
                     break;
-                case 1:
+                case "1":
                     createUser();
+                    QuickChat chat = new QuickChat();
+                    chat.draftMessage();
                     break;
                 default:
                     System.err.println("invalid input detected");
             }
-        } 
-        catch (java.util.InputMismatchException e) {
-            System.err.println("Invalid input. Please enter a number."); //catching non numeric input to prevent loop from crashing
-            capture.nextLine();
+        } catch (NullPointerException e) {
+            System.err.println("No input was entered");
         }
     }
 }
     /*Create new login on every call*/
     private void createUser() {
-        Login login = new Login();
+        LoginManager login = new LoginManager();
         login.registerUser();
     }
-    /*Create internal menu system*/
+    /*TODO:Create internal menu system*/
     public void updateUserDetails() {
 
     }
-    /*Call function from user database*/
+    /*TODO:Call function from user database*/
     public void deleteUser() {
 
     }
